@@ -110,7 +110,7 @@ void Ball::moveball()
 
         // Update the screen buffer
         wind->UpdateBuffer();
-        Pause(20);
+    
        
         
     } while (true);
