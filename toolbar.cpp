@@ -169,7 +169,7 @@ void toolbar::draw() const
 	for (int i = 0; i < ICON_COUNT; i++)
 		iconsList[i]->draw();
 	window* pWind = pGame->getWind();
-	pWind->DrawString(config.windWidth / 2, 10, "100:00");
+	pWind->DrawString(config.windWidth / 2, 10, "10:00");
 	pWind->DrawString(config.windWidth / 2 + 250, 10, "Score : " + to_string(config.Score));
 	pWind->DrawString(config.windWidth / 2 + 500, 10, "Lives : " + to_string(config.Lives));
 	
