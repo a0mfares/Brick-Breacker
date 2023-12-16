@@ -36,7 +36,10 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	int padleheight = int(paddleAreaHeight / 30);
 	int padlewidth = 150;
 	bool isPlaying = false;
+	int Score = 0;
+	int Lives = 3;
 	
+
 	
 	
 
