@@ -169,7 +169,6 @@
     <ClCompile Include="drawable.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="grid.cpp" />
-    <ClCompile Include="lowToolbar.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="toolbar.cpp" />
@@ -202,7 +201,6 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="grid.h" />
-    <ClInclude Include="lowToolbar.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="toolbar.h" />
   </ItemGroup>

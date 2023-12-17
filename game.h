@@ -4,7 +4,7 @@
 #include "grid.h"
 #include "Paddle.h"
 #include "Ball.h"
-#include "lowToolbar.h"
+
 
 
 
@@ -24,9 +24,12 @@ class game
 	grid* bricksGrid;
 	Paddle* padlespot;
 	Ball* ballspot;
-	/*LowertoolBar* lowerToolbar;*/
+	
+
+
 	bool isplay =false;
 	bool isExit = false;
+	bool ispause = false;
 	
 	
 	
@@ -70,6 +73,7 @@ public:
 	void setmode(MODE m);
 	void setplay(bool p);
 	void setexit(bool e);
+	void setpause(bool p);
 	
 
 

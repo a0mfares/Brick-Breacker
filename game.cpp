@@ -46,11 +46,7 @@ game::game()
 	////5- Create lower Toolbar
 
 	//5- Create lower Toolbar
-	/*point lowerpoint;
-	lowerpoint.x = 0;
-	lowerpoint.y = 0;
-	lowerToolbar = new LowertoolBar(lowerpoint, 0, config.lowertoolbarHieght, this);
-	lowerToolbar->draw();*/
+	
 
 	//5- Create the Paddle
 	point PadleUpperleft;
@@ -103,7 +99,7 @@ game::~game()
 	delete bricksGrid;
 	delete padlespot;
 	delete ballspot;
-	/*delete lowerToolbar;*/
+	
 }
 
 
@@ -222,6 +218,11 @@ void game::setexit(bool e)
 	isExit = e;
 }
 
+void game::setpause(bool p)
+{
+	ispause = p;
+}
+
 
 
 
@@ -265,7 +266,7 @@ void game::go()
 
 				
 			//[1] If user clicks on the Toolbar
-				if (y >= config.lowertoolbarHieght && y < config.windHeight)
+				if ((y >= 0 && y < config.toolBarHeight)&& x>330)
 				{
 
 					gameToolbar->handleClick(x, y);
@@ -274,8 +275,9 @@ void game::go()
 				ballspot->moveball();
 				
 				
-			} while (isplay);
+			} while (isplay && !ispause);
 			gameMode = MODE_DSIGN;
+			
 		}
 		
 		

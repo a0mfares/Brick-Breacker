@@ -123,9 +123,6 @@
     </ClCompile>
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="lowToolbar.cpp">
-      <Filter>toolbar and icons</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -205,9 +202,6 @@
     </ClInclude>
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="Ball.h" />
-    <ClInclude Include="lowToolbar.h">
-      <Filter>toolbar and icons</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base Classes">

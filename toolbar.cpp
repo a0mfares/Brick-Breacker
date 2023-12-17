@@ -56,6 +56,32 @@ void iconDel::onClick()
 	
 
 }
+iconSave::iconSave(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
+	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
+{
+}
+
+void iconSave::onClick()
+{
+	//TO DO: add code for cleanup and game exit here
+}
+iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
+	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
+{}
+
+void iconLoad::onClick() {
+
+}
+
+
+iconPause::iconPause(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
+	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
+{}
+
+void iconPause::onClick() {
+	pGame->setpause(true);
+	pGame->gameMode = game::MODE::MODE_DSIGN;
+}
 
 ////////////////////////////////////////////////////  class iconAddNormalBrick   //////////////////////////////////////////////
 iconAddNormalBrick::iconAddNormalBrick(point r_uprleft, int r_width, int r_height, game* r_pGame) :
@@ -154,6 +180,9 @@ toolbar::toolbar(point r_uprleft, int wdth, int hght, game* pG) :
 	iconsImages[ICON_ADD_ROCK] = "images\\ToolbarIcons\\RockIcon.jpg";
 	iconsImages[ICON_PLAY] = "images\\ToolbarIcons\\Play.jpg";
 	iconsImages[ICON_DEL] = "images\\ToolbarIcons\\deleteBrick.jpg";
+	iconsImages[ICON_SAVE] = "images\\ToolbarIcons\\Save-icon.jpg";
+	iconsImages[ICON_LOAD] = "images\\ToolbarIcons\\Upload.jpg";
+	iconsImages[ICON_PAUSE] = "images\\ToolbarIcons\\Pause.jpg";
 	iconsImages[ICON_EXIT] = "images\\ToolbarIcons\\ExitIcon.jpg";
 
 
@@ -175,6 +204,12 @@ toolbar::toolbar(point r_uprleft, int wdth, int hght, game* pG) :
 	iconsList[ICON_PLAY] = new iconPlay(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
 	iconsList[ICON_DEL] = new iconDel(p, config.iconWidth, height, pGame);
+	p.x += config.iconWidth;
+	iconsList[ICON_SAVE] = new iconSave(p, config.iconWidth, height, pGame);
+	p.x += config.iconWidth;
+	iconsList[ICON_LOAD] = new iconLoad(p, config.iconWidth, height, pGame);
+	p.x += config.iconWidth;
+	iconsList[ICON_PAUSE] = new iconPause(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
 	iconsList[ICON_EXIT] = new iconExit(p, config.iconWidth, height, pGame);
 
