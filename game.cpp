@@ -262,7 +262,7 @@ void game::go()
 				
 				pWind->GetMouseClick(x, y);
 
-				ballspot->moveball();
+				
 			//[1] If user clicks on the Toolbar
 				if (y >= 0 && y < config.toolBarHeight)
 				{
@@ -270,6 +270,7 @@ void game::go()
 					gameToolbar->handleClick(x, y);
 					cout << y<< endl;
 				}
+				ballspot->moveball();
 				
 				
 			} while (isplay);
