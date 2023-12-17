@@ -46,11 +46,11 @@ game::game()
 	////5- Create lower Toolbar
 
 	//5- Create lower Toolbar
-	//point lowerpoint;
-	//lowerpoint.x = 0;
-	//lowerpoint.y = 0;
-	//lowerToolbar = new LowertoolBar(lowerpoint, 0, config.lowertoolbarHieght, this);
-	//lowerToolbar->draw();
+	point lowerpoint;
+	lowerpoint.x = 0;
+	lowerpoint.y = 0;
+	lowerToolbar = new LowertoolBar(lowerpoint, 0, config.lowertoolbarHieght, this);
+	lowerToolbar->draw();
 
 	//5- Create the Paddle
 	point PadleUpperleft;
@@ -103,7 +103,7 @@ game::~game()
 	delete bricksGrid;
 	delete padlespot;
 	delete ballspot;
-	//delete lowerToolbar;
+	delete lowerToolbar;
 }
 
 

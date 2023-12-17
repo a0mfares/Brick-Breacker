@@ -30,7 +30,7 @@ class game
 	grid* bricksGrid;
 	Paddle* padlespot;
 	Ball* ballspot;
-	//LowertoolBar* lowerToolbar;
+	LowertoolBar* lowerToolbar;
 	bool isplay =false;
 	bool isExit = false;
 	

@@ -66,11 +66,11 @@ void Ball::moveball()
         uprLft.x += Xinc / 2;
         uprLft.y += Yinc / 2;
 
-        window* pWind = pGame->getWind();
+        
         //draw lines showing the grid
         wind->SetPen(LAVENDER, 1);
-        pGame->getWind()->SetBrush(LAVENDER);
-        pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+        wind->SetBrush(LAVENDER);
+        wind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
         pGame->getGrid()->draw();
         pGame->gettoolbarr()->draw();
         pGame->getpadle()->draw();
@@ -121,7 +121,6 @@ void Ball::moveball()
 void Ball::draw() const
 {
 	window* pWind = pGame->getWind();
-	//draw lines showing the grid
 	pWind->SetPen(BLACK, 1);
 	pWind->SetBrush(BLACK);
 	pWind->DrawCircle(uprLft.x, uprLft.y, width,FILLED);

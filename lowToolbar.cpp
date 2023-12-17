@@ -50,7 +50,7 @@ LowertoolBar::LowertoolBar(point r_uprleft, int wdth, int hght, game* pG) :
 	
 
 	point p;
-	p.x = config.lowertoolbarPositionY + 100;
+	p.x = config.lowertoolbarPositionY + 190;
 	p.y = config.remainingHeight ;
 
 	iconsList = new lowerToolbaricon * [ICON_COUNT];
