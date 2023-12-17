@@ -90,3 +90,12 @@ int grid::addBrick(BrickType brkType, point clickedPoint)
 	}
 	return 1;
 }
+void grid::deleteBrick(point clicked)
+{
+	int gridCellRowIndex = (clicked.y - uprLft.y) / config.brickHeight;
+	int gridCellColIndex = clicked.x / config.brickWidth;
+	if (brickMatrix[gridCellRowIndex][gridCellColIndex] != nullptr) {
+		delete brickMatrix[gridCellRowIndex][gridCellColIndex];
+		brickMatrix[gridCellRowIndex][gridCellColIndex] = nullptr;
+	}
+}
