@@ -131,6 +131,7 @@ void game::clearStatusBar() const
 	pWind->SetPen(config.statusBarColor, 1);
 	pWind->SetBrush(config.statusBarColor);
 	pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -246,6 +247,7 @@ void game::go() const
 			}
 		}
 		
+		
 
 	} while (!isplay );
 	
@@ -257,6 +259,7 @@ void game::move()
 	do
 	{
 		ballspot->moveball();
+		
 	} while (isplay);
 
 	isplay = false;

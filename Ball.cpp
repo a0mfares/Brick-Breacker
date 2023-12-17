@@ -113,11 +113,19 @@ void Ball::moveball()
 
         // Draw the game elements
         wind->SetPen(LAVENDER, 1);
-        pGame->getWind()->SetBrush(LAVENDER);
-        pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+        wind->SetBrush(LAVENDER);
+        wind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
         pGame->getGrid()->draw();
         pGame->gettoolbarr()->draw();
         pGame->getpadle()->draw();
+        wind->SetPen(config.statusBarColor, 1);
+        wind->SetBrush(config.statusBarColor);
+        wind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+        wind->SetPen(BLACK, 1);
+        wind->SetBrush(BLACK);
+        wind->DrawString(10, config.windHeight - config.statusBarHeight, "10:00");
+        wind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
+        wind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
         this->draw();
 
         // Check for arrow key input
@@ -148,15 +156,18 @@ void Ball::moveball()
 
             // Draw the updated paddle
             pGame->getpadle()->draw();
+
+          
         }
 
         // Update the screen buffer
         wind->UpdateBuffer();
+      
 
     } while (true);
 
 
-
+   
 
 
 
