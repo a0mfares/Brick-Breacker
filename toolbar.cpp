@@ -31,6 +31,31 @@ void iconPlay::onClick()
 	pGame->gameMode = game::MODE::MODE_PLAY;
 	
 }
+iconDel::iconDel(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
+	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
+{}
+
+void iconDel::onClick()
+{
+	pGame->printMessage("Click on filled cells to remove Bricks  ==> Right-Click to stop <==");
+	int x, y;
+	clicktype t = pGame->getMouseClick(x, y);
+	while (t == LEFT_CLICK)
+	{
+
+		point clicked;
+		clicked.x = x;
+		clicked.y = y;
+		grid* pGrid = pGame->getGrid();
+		pGrid->deleteBrick(clicked);
+		pGrid->draw();
+		t = pGame->getMouseClick(x, y);
+	}
+	pGame->printMessage("");
+
+	
+
+}
 
 ////////////////////////////////////////////////////  class iconAddNormalBrick   //////////////////////////////////////////////
 iconAddNormalBrick::iconAddNormalBrick(point r_uprleft, int r_width, int r_height, game* r_pGame) :
@@ -128,6 +153,7 @@ toolbar::toolbar(point r_uprleft, int wdth, int hght, game* pG) :
 	iconsImages[ICON_ADD_HARD] = "images\\ToolbarIcons\\HardBrickIcon.jpg";
 	iconsImages[ICON_ADD_ROCK] = "images\\ToolbarIcons\\RockIcon.jpg";
 	iconsImages[ICON_PLAY] = "images\\ToolbarIcons\\Play.jpg";
+	iconsImages[ICON_DEL] = "images\\ToolbarIcons\\deleteBrick.jpg";
 	iconsImages[ICON_EXIT] = "images\\ToolbarIcons\\ExitIcon.jpg";
 
 
@@ -147,6 +173,8 @@ toolbar::toolbar(point r_uprleft, int wdth, int hght, game* pG) :
 	iconsList[ICON_ADD_ROCK] = new iconAddRock(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
 	iconsList[ICON_PLAY] = new iconPlay(p, config.iconWidth, height, pGame);
+	p.x += config.iconWidth;
+	iconsList[ICON_DEL] = new iconDel(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
 	iconsList[ICON_EXIT] = new iconExit(p, config.iconWidth, height, pGame);
 
@@ -205,4 +233,5 @@ bool toolbar::handleClick(int x, int y)
 
 
 }
+
 

@@ -265,7 +265,7 @@ void game::go()
 
 				
 			//[1] If user clicks on the Toolbar
-				if (y >= 0 && y < config.toolBarHeight)
+				if (y >= config.lowertoolbarHieght && y < config.windHeight)
 				{
 
 					gameToolbar->handleClick(x, y);

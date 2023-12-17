@@ -45,6 +45,12 @@ public:
 	iconPlay(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	virtual void onClick();
 };
+class iconDel :public toolbarIcon
+{
+public:
+	iconDel(point r_uprleft, int r_width, int r_height, game* r_pGame);
+	virtual void onClick();
+};
 
 
 
@@ -63,6 +69,7 @@ class toolbar :public drawable
 		ICON_ADD_HARD,
 		ICON_ADD_ROCK,
 		ICON_PLAY,
+		ICON_DEL,
 		ICON_EXIT,
 		//TODO: Add more icons names here
 
