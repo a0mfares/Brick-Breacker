@@ -46,11 +46,11 @@ game::game()
 	////5- Create lower Toolbar
 
 	//5- Create lower Toolbar
-	point lowerpoint;
+	/*point lowerpoint;
 	lowerpoint.x = 0;
 	lowerpoint.y = 0;
 	lowerToolbar = new LowertoolBar(lowerpoint, 0, config.lowertoolbarHieght, this);
-	lowerToolbar->draw();
+	lowerToolbar->draw();*/
 
 	//5- Create the Paddle
 	point PadleUpperleft;
@@ -103,7 +103,7 @@ game::~game()
 	delete bricksGrid;
 	delete padlespot;
 	delete ballspot;
-	delete lowerToolbar;
+	/*delete lowerToolbar;*/
 }
 
 
@@ -232,7 +232,7 @@ void game::go()
 {
 	//This function reads the position where the user clicks to determine the desired operation
 	int x,y;
-	int r, f;
+	
 	char c;
 	
 	
@@ -269,12 +269,13 @@ void game::go()
 				{
 
 					gameToolbar->handleClick(x, y);
-					cout << y<< endl;
+					
 				}
 				ballspot->moveball();
 				
 				
 			} while (isplay);
+			gameMode = MODE_DSIGN;
 		}
 		
 		
