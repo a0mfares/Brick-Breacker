@@ -68,6 +68,12 @@ void Ball::moveball()
             Yinc = -Yinc;
         }
 
+        
+        //draw lines showing the grid
+        wind->SetPen(LAVENDER, 1);
+        wind->SetBrush(LAVENDER);
+        wind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+
         // Check for horizontal boundary collision
         if (uprLft.x - BallRad <= 0 || uprLft.x + BallRad >= config.windWidth - 10) {
             // Invert the horizontal direction
@@ -111,6 +117,14 @@ void Ball::moveball()
         pGame->getGrid()->draw();
         pGame->gettoolbarr()->draw();
         pGame->getpadle()->draw();
+        wind->SetPen(config.statusBarColor, 1);
+        wind->SetBrush(config.statusBarColor);
+        wind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+        wind->SetPen(BLACK, 1);
+        wind->SetBrush(BLACK);
+        wind->DrawString(10, config.windHeight - config.statusBarHeight, "10:00");
+        wind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
+        wind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
         this->draw();
 
         // Check for arrow key input
@@ -141,6 +155,8 @@ void Ball::moveball()
 
             // Draw the updated paddle
             pGame->getpadle()->draw();
+
+          
         }
 
         // Update the screen buffer
@@ -150,7 +166,7 @@ void Ball::moveball()
     
 
 
-
+   
 
 
 
@@ -171,7 +187,6 @@ Ball::Rect Ball::getBoundingBox() const
 void Ball::draw() const
 {
 	window* pWind = pGame->getWind();
-	//draw lines showing the grid
 	pWind->SetPen(BLACK, 1);
 	pWind->SetBrush(BLACK);
 	pWind->DrawCircle(uprLft.x, uprLft.y, width,FILLED);

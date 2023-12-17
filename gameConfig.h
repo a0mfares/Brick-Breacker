@@ -26,7 +26,7 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	int lowertoolbarHieght = 40;
 	int brickWidth = 66;
 	int brickHeight = 30;
-	int lowertoolbarPositionY = 310;
+	int lowertoolbarPositionY = 350;
 	color gridLinesColor = BLACK;
 	int BallRad = 10;
 	

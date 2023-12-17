@@ -46,11 +46,11 @@ game::game()
 	////5- Create lower Toolbar
 
 	//5- Create lower Toolbar
-	//point lowerpoint;
-	//lowerpoint.x = 0;
-	//lowerpoint.y = 0;
-	//lowerToolbar = new LowertoolBar(lowerpoint, 0, config.lowertoolbarHieght, this);
-	//lowerToolbar->draw();
+	point lowerpoint;
+	lowerpoint.x = 0;
+	lowerpoint.y = 0;
+	lowerToolbar = new LowertoolBar(lowerpoint, 0, config.lowertoolbarHieght, this);
+	lowerToolbar->draw();
 
 	//5- Create the Paddle
 	point PadleUpperleft;
@@ -103,7 +103,7 @@ game::~game()
 	delete bricksGrid;
 	delete padlespot;
 	delete ballspot;
-	//delete lowerToolbar;
+	delete lowerToolbar;
 }
 
 
@@ -131,6 +131,7 @@ void game::clearStatusBar() const
 	pWind->SetPen(config.statusBarColor, 1);
 	pWind->SetBrush(config.statusBarColor);
 	pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -276,6 +277,7 @@ void game::go()
 			} while (isplay);
 		}
 		
+		
 
 	} while (!isExit );
 	
@@ -287,6 +289,7 @@ void game::move()
 	do
 	{
 		ballspot->moveball();
+		
 	} while (isplay);
 
 	isplay = false;
