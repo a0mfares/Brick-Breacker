@@ -26,3 +26,14 @@ void Paddle::setpoint(point p)
 	uprLft = p;
 }
 
+Paddle::Rect Paddle::getBoundingBox() const
+{
+    Rect boundingBox;
+    // Adjust the bounding box based on the paddle's dimensions
+    boundingBox.upperLeft.x = uprLft.x;
+    boundingBox.upperLeft.y = uprLft.y;
+    boundingBox.lowerRight.x = uprLft.x + config.padlewidth;
+    boundingBox.lowerRight.y = uprLft.y + config.padleheight;
+    return boundingBox;
+}
+

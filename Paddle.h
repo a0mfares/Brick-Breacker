@@ -11,6 +11,7 @@ public:
 	void collisionAction();
 	point getpoint()const;
 	void setpoint(point p);
+	Rect getBoundingBox() const override;
 	
 	
 

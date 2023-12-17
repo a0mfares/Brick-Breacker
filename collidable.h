@@ -9,12 +9,14 @@ class collidable : public drawable
         bool collision = false;
         point collisionPoint;
     };
+  
+
     // Calculate the bounding boxes of the objects
-    int left = uprLft.x;
-    int right = uprLft.x + width;
-    int top = uprLft.y;
-    int bottom = uprLft.y + height;
+  
 public:
+    struct Rect {
+        point upperLeft, lowerRight;
+    };
     /*  struct collisionInfo
       {
           bool collision = false;
@@ -24,5 +26,6 @@ public:
     collidable(point r_uprleft, int r_width, int r_height, game* r_pGame);
 
     virtual void collisionAction() = 0;  // action that should be performed upon collision
+    virtual Rect getBoundingBox() const = 0;
     virtual collisionInfo isColliding(const collidable* obj1, const collidable* obj2)const;
 };

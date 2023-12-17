@@ -11,6 +11,7 @@ public:
 	Ball(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
 	void moveball();
+	Rect getBoundingBox() const override;
 	
 	void  draw() const;
 	struct factor;

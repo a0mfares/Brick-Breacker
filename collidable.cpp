@@ -50,100 +50,27 @@ collidable::collidable(point r_uprleft, int r_width, int r_height, game* r_pGame
 //    // Return the collision information
 //    return info;
 //}
-
-
 collidable::collisionInfo collidable::isColliding(const collidable* obj1, const collidable* obj2) const
 {
-
     collisionInfo collisionInfo;
     collisionInfo.collision = false;
-    // Check if the bounding boxes overlap for left or right sides
-    // calculating the collision point(x,y) 
 
-    if (obj1->right == obj2->left)
-        if (obj1->top <= obj2->top && obj1->top >= obj2->bottom)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->right;
-            collisionInfo.collisionPoint.y = obj1->top + (obj1->top + obj2->bottom) / 2;
-        }
-        else if (obj1->bottom >= obj2->top && obj1->bottom <= obj2->bottom)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->right;
-            collisionInfo.collisionPoint.y = obj2->top + (obj2->top + obj1->bottom) / 2;
-        }
-        else if (obj2->top <= obj1->top && obj2->bottom >= obj1->bottom)
+    // Check for non-collision cases first
+    if (obj1->getBoundingBox().lowerRight.x < obj2->getBoundingBox().upperLeft.x ||
+        obj1->getBoundingBox().upperLeft.x > obj2->getBoundingBox().lowerRight.x ||
+        obj1->getBoundingBox().lowerRight.y < obj2->getBoundingBox().upperLeft.y ||
+        obj1->getBoundingBox().upperLeft.y > obj2->getBoundingBox().lowerRight.y) {
+        return collisionInfo;
+    }
 
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->right;
-            collisionInfo.collisionPoint.y = obj2->top + (obj2->bottom - obj2->top) / 2;
-        }
-    if (obj1->left == obj2->right)
-        if (obj1->top <= obj2->top && obj1->top >= obj2->bottom)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->left;
-            collisionInfo.collisionPoint.y = obj1->top + (obj1->top + obj2->bottom) / 2;
-        }
-        else if (obj1->bottom >= obj2->top && obj1->bottom <= obj2->bottom)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->left;
-            collisionInfo.collisionPoint.y = obj2->top + (obj2->top + obj1->bottom) / 2;
-        }
-        else if (obj2->top <= obj1->top && obj2->bottom >= obj1->bottom)
+    // Bounding boxes overlap, handle collision cases
 
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->left;
-            collisionInfo.collisionPoint.y = obj2->top + (obj2->bottom - obj2->top) / 2;
-        }
+    // Calculate the collision point based on the centers of the two objects
+    collisionInfo.collisionPoint.x = (obj1->getBoundingBox().upperLeft.x + obj1->getBoundingBox().lowerRight.x) / 2;
+    collisionInfo.collisionPoint.y = (obj1->getBoundingBox().upperLeft.y + obj1->getBoundingBox().lowerRight.y) / 2;
 
-    //check heck if the bounding boxes overlap for top or bottom sides
-    //calculating the collision point(x, y)
-    if (obj1->top == obj2->bottom)
-        if (obj1->left <= obj2->left && obj1->left >= obj2->right)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->left + (obj2->right - obj1->left) / 2;
-            collisionInfo.collisionPoint.y = obj1->top;
-        }
-        else  if (obj2->left <= obj1->left && obj2->left >= obj1->right)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj2->left + (obj1->right - obj2->left) / 2;
-            collisionInfo.collisionPoint.y = obj1->top;
-        }
-        else if (obj2->left >= obj1->left && obj2->right <= obj1->right)
-
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj2->left + (obj2->right - obj2->left) / 2;
-            collisionInfo.collisionPoint.y = obj1->top;
-        }
-    if (obj1->bottom == obj2->top)
-        if (obj1->left <= obj2->left && obj1->left >= obj2->right)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj1->left + (obj2->right - obj1->left) / 2;
-            collisionInfo.collisionPoint.y = obj1->bottom;
-        }
-        else  if (obj2->left <= obj1->left && obj2->left >= obj1->right)
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj2->left + (obj1->right - obj2->left) / 2;
-            collisionInfo.collisionPoint.y = obj1->bottom;
-        }
-        else if (obj2->left >= obj1->left && obj2->right <= obj1->right)
-
-        {
-            collisionInfo.collision = true;
-            collisionInfo.collisionPoint.x = obj2->left + (obj2->right - obj2->left) / 2;
-            collisionInfo.collisionPoint.y = obj1->bottom;
-
-            return collisionInfo;
-        }
+    collisionInfo.collision = true;
+    return collisionInfo;
 }
+
 
