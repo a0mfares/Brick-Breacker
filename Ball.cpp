@@ -117,14 +117,14 @@ void Ball::moveball()
         pGame->getGrid()->draw();
         pGame->gettoolbarr()->draw();
         pGame->getpadle()->draw();
-       /* pGame->getWind()->SetPen(config.statusBarColor, 1);
+        pGame->getWind()->SetPen(config.statusBarColor, 1);
         pGame->getWind()->SetBrush(config.statusBarColor);
         pGame->getWind()->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
         pGame->getWind()->SetPen(BLACK, 1);
         pGame->getWind()->SetBrush(BLACK);
         pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, "10:00");
         pGame->getWind()->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
-        pGame->getWind()->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));*/
+        pGame->getWind()->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
         this->draw();
 
         // Check for arrow key input
