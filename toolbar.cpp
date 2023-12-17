@@ -26,7 +26,9 @@ iconPlay::iconPlay(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 
 void iconPlay::onClick()
 {
+	
 	pGame->setplay(true);
+	pGame->gameMode = game::MODE::MODE_PLAY;
 	
 }
 

@@ -1,9 +1,20 @@
 #pragma once
 #include "drawable.h"
 #include "collidable.h"
+#include "gameConfig.h"
+
+#include <iostream>
+using namespace std;
 class Ball : public  collidable
 {
 	int BallRad = 10;
+	// Bounce back with a deflection angle between 0 and 45 degrees
+	float deflectionAngle = std::rand() % 46; // Random angle between 0 and 45 degrees
+	int Xinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
+	int Yinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
+	
+
+	
 	
 	
 public:

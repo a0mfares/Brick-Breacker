@@ -13,13 +13,7 @@
 //Main class that coordinates the game operation
 class game
 {
-	enum MODE	//Game mode
-	{
-		MODE_DSIGN,	//Desing mode (startup mode)
-		MODE_PLAY	//Playing mode
-	};
-
-	MODE gameMode;
+	
 
 	/// Add more members if needed
 
@@ -35,8 +29,16 @@ class game
 	bool isExit = false;
 	
 	
+	
 
 public:
+	enum MODE	//Game mode
+	{
+		MODE_DSIGN,	//Desing mode (startup mode)
+		MODE_PLAY	//Playing mode
+	};
+
+	MODE gameMode;
 	game();
 	~game();
 
@@ -54,7 +56,7 @@ public:
 
 	void printMessage(string msg) const;	//Print a message on Status bar
 
-	void go() const;
+	void go() ;
 	void move();
 
 	window* getWind() const;		//returns a pointer to the graphics window
@@ -65,8 +67,10 @@ public:
 	Paddle* getpadle() const;
 	toolbar* gettoolbarr() const;
 	MODE getMode() const;
+	void setmode(MODE m);
 	void setplay(bool p);
 	void setexit(bool e);
+	
 
 
 };

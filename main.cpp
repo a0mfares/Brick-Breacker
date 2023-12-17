@@ -8,7 +8,7 @@ int main()
 	game Game;
 
 	Game.go();
-	Game.move();
+	/*Game.move();*/
 
 	
 	return 0;

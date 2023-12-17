@@ -203,6 +203,13 @@ game::MODE game::getMode() const
 	return gameMode;
 }
 
+void game::setmode(MODE m)
+{
+	gameMode = m;
+}
+
+
+
 
 void game::setplay(bool p)
 {
@@ -218,11 +225,13 @@ void game::setexit(bool e)
 
 
 
+
 ////////////////////////////////////////////////////////////////////////
-void game::go() const
+void game::go() 
 {
 	//This function reads the position where the user clicks to determine the desired operation
-	int x, y;
+	int x,y;
+	int r, f;
 	char c;
 	
 	
@@ -233,7 +242,7 @@ void game::go() const
 	do
 	{
 		printMessage("Ready...");
-		getMouseClick(x, y);	//Get the coordinates of the user click
+		pWind->GetMouseClick(x, y);	//Get the coordinates of the user click
 		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
@@ -245,9 +254,29 @@ void game::go() const
 				gameToolbar->handleClick(x, y);
 			}
 		}
+		if (gameMode == MODE_PLAY)		//Game is in the play mode
+		{
+			
+			do
+			{
+				
+				pWind->GetMouseClick(x, y);
+
+				ballspot->moveball();
+			//[1] If user clicks on the Toolbar
+				if (y >= 0 && y < config.toolBarHeight)
+				{
+
+					gameToolbar->handleClick(x, y);
+					cout << y<< endl;
+				}
+				
+				
+			} while (isplay);
+		}
 		
 
-	} while (!isplay );
+	} while (!isExit );
 	
 }
 void game::move()

@@ -25,12 +25,7 @@ void Ball::moveball()
 {
 
     pGame->getWind()->SetBuffering(true);
-
     
-    // Bounce back with a deflection angle between 0 and 45 degrees
-    float deflectionAngle = std::rand() % 90; // Random angle between 0 and 45 degrees
-    int Xinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
-    int Yinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
 
 
 
@@ -39,19 +34,23 @@ void Ball::moveball()
     keytype kType, kType2;
     int BallCenterX = config.windWidth / 2;
     int BallCenterY = config.paddleAreaHeight - config.BallRad;
-    bool isvertical;
-    auto wind = pGame->getWind();
-    auto paddle = pGame->getpadle();
-    point p = paddle->getpoint();
+    bool isvertical = true;
+    point p = pGame->getpadle()->getpoint();
+   
 
-    isvertical = true;
+    
+    
+   
+    
 
 
     // Assuming the Ball and Paddle classes have appropriate methods and attributes.
 
-    do {
-        wind->FlushKeyQueue();
-        kType = wind->GetKeyPress(cKeyData);
+    
+    
+    
+        pGame->getWind()->FlushKeyQueue();
+        kType = pGame->getWind()->GetKeyPress(cKeyData);
 
         // Check for paddle-ball collision
         auto PadleBallCollide = isColliding(this, pGame->getpadle());
@@ -106,7 +105,7 @@ void Ball::moveball()
         }
 
         // Draw the game elements
-        wind->SetPen(LAVENDER, 1);
+        pGame->getWind()->SetPen(LAVENDER, 1);
         pGame->getWind()->SetBrush(LAVENDER);
         pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
         pGame->getGrid()->draw();
@@ -115,9 +114,9 @@ void Ball::moveball()
         this->draw();
 
         // Check for arrow key input
-        kType2 = wind->GetKeyPress(cKeyData);
-        wind->SetPen(LAVENDER, 1);
-        wind->SetBrush(LAVENDER);
+        kType2 = pGame->getWind()->GetKeyPress(cKeyData);
+        pGame->getWind()->SetPen(LAVENDER, 1);
+        pGame->getWind()->SetBrush(LAVENDER);
 
         if (kType2 == ARROW) {
             switch (cKeyData) {
@@ -125,7 +124,7 @@ void Ball::moveball()
                 // Move paddle left
                 if (p.x > 10) {
                     p.x -= 40;
-                    wind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
                     pGame->getpadle()->setpoint(p);
                 }
                 break;
@@ -134,7 +133,7 @@ void Ball::moveball()
                 // Move paddle right
                 if (p.x < config.windWidth - 200) {
                     p.x += 40;
-                    wind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
                     pGame->getpadle()->setpoint(p);
                 }
                 break;
@@ -145,9 +144,10 @@ void Ball::moveball()
         }
 
         // Update the screen buffer
-        wind->UpdateBuffer();
+        pGame->getWind()->UpdateBuffer();
+    
 
-    } while (true);
+    
 
 
 

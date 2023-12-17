@@ -28,6 +28,7 @@ class normalBrick :public brick
 public:
 	normalBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
+	Rect getBoundingBox() const;
 };
 
 ////////////////////////////////////////////////////  class hardBrick  /////////////////////////////////
@@ -37,6 +38,7 @@ class hardBrick :public brick
 public:
 	hardBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
+	Rect getBoundingBox() const;
 };
 
 ////////////////////////////////////////////////////  class Rock  /////////////////////////////////
@@ -46,6 +48,7 @@ class Rock :public brick
 public:
 	Rock(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
+	Rect getBoundingBox() const;
 };
 
 
