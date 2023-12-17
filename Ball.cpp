@@ -69,6 +69,12 @@ void Ball::moveball()
             Yinc = -Yinc;
         }
 
+        
+        //draw lines showing the grid
+        wind->SetPen(LAVENDER, 1);
+        wind->SetBrush(LAVENDER);
+        wind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+
         // Check for horizontal boundary collision
         if (uprLft.x - BallRad <= 0 || uprLft.x + BallRad >= config.windWidth - 10) {
             // Invert the horizontal direction
@@ -105,11 +111,10 @@ void Ball::moveball()
 
         }
 
-        window* pWind = pGame->getWind();
-        //draw lines showing the grid
+        // Draw the game elements
         wind->SetPen(LAVENDER, 1);
         pGame->getWind()->SetBrush(LAVENDER);
-        pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+        pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
         pGame->getGrid()->draw();
         pGame->gettoolbarr()->draw();
         pGame->getpadle()->draw();
