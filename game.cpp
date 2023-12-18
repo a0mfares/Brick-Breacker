@@ -234,20 +234,19 @@ void game::setpause(bool p)
 string game::updateTIme()
 {
 	std::string timeStamp = "";
-	const int totalSeconds = 60;  // Total seconds in a minute
-	const int totalMinutes = 10;  // Total minutes in the countdown
+	const int totalSeconds = 60;  
+	const int totalMinutes = 10;  
 
 	for (int min = totalMinutes - 1; min >= 0; --min)
 	{
 		for (int sec = totalSeconds - 1; sec >= 0; --sec)
 		{
-			// Format the time and store it in the timeStamp variable
-			timeStamp = std::to_string(min) + ":" + std::setfill('0') + std::setw(2) + std::to_string(sec);
+			
+			
+			//timeStamp = std::to_string(min) + ":" + std::setfill('0') + std::setw(2) + std::to_string(sec);
 
-			// Print or use timeStamp as needed
 			std::cout << "Time Remaining: " << timeStamp << std::endl;
 
-			// Sleep for 1 second
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 		}
 	}

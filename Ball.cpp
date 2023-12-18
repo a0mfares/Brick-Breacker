@@ -122,7 +122,7 @@ void Ball::moveball()
         pGame->getWind()->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
         pGame->getWind()->SetPen(BLACK, 1);
         pGame->getWind()->SetBrush(BLACK);
-        pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
+        //pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
         pGame->getWind()->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
         pGame->getWind()->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
         this->draw();
