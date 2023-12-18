@@ -75,7 +75,8 @@ public:
 	void setplay(bool p);
 	void setexit(bool e);
 	void setpause(bool p);
-	
+	string updateTIme();
+
 
 
 };

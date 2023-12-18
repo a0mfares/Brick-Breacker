@@ -20,6 +20,7 @@ class brick :public collidable
 {
 public:
 	brick(point r_uprleft, int r_width, int r_height, game* r_pGame);
+	int strength;
 
 };
 
