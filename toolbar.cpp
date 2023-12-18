@@ -63,7 +63,7 @@ iconSave::iconSave(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 
 void iconSave::onClick()
 {
-	//TO DO: add code for cleanup and game exit here
+
 }
 iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)

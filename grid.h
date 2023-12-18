@@ -18,6 +18,8 @@ public:
 	void draw() const;
 	int addBrick(BrickType brkType, point clickedPoint);
 	void deleteBrick(point clicked);
+	brick*** getbrickmatrix();
+	void collisonaction();
 
 };
 

@@ -108,4 +108,22 @@ void grid::deleteBrick(point clicked)
 		
 		pGame->getWind()->DrawRectangle(newBrickUpleft.x, newBrickUpleft.y,  newBrickUpleft.x + config.brickWidth, newBrickUpleft.y + config.brickHeight ,FILLED);
 	}
+	
+}
+
+brick*** grid::getbrickmatrix()
+{
+	return brickMatrix;
+}
+
+void grid::collisonaction()
+{
+	
+	int gridCellRowIndex = (pGame->getball()->getBoundingBox().upperLeft.y - uprLft.y) / config.brickHeight;
+	int gridCellColIndex = pGame->getball()->getBoundingBox().upperLeft.x / config.brickWidth;
+	point newBrickUpleft;
+	newBrickUpleft.x = uprLft.x + gridCellColIndex * config.brickWidth;
+	newBrickUpleft.y = uprLft.y + gridCellRowIndex * config.brickHeight;
+	brickMatrix[gridCellRowIndex][gridCellColIndex]->collisionAction();
+
 }
