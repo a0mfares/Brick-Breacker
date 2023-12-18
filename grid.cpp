@@ -116,14 +116,25 @@ brick*** grid::getbrickmatrix()
 	return brickMatrix;
 }
 
-void grid::collisonaction()
-{
-	
-	int gridCellRowIndex = (pGame->getball()->getBoundingBox().upperLeft.y - uprLft.y) / config.brickHeight;
-	int gridCellColIndex = pGame->getball()->getBoundingBox().upperLeft.x / config.brickWidth;
-	point newBrickUpleft;
-	newBrickUpleft.x = uprLft.x + gridCellColIndex * config.brickWidth;
-	newBrickUpleft.y = uprLft.y + gridCellRowIndex * config.brickHeight;
-	brickMatrix[gridCellRowIndex][gridCellColIndex]->collisionAction();
+//void grid::collisionAction(Ball* ball) {
+//	// Iterate through the bricks and check for collisions with the ball
+//	for (int i = 0; i < rows; i++) {
+//		for (int j = 0; j < cols; j++) {
+//			if (brickMatrix[i][j] != nullptr) {
+//				auto BrickBallCollide = brickMatrix[i][j]-> isColliding(ball, brickMatrix[i][j]);
+//				if (BrickBallCollide.collision) {
+//					// Handle brick-ball collision
+//					brickMatrix[i][j]->collisionAction();
+//					// Reflect the ball's direction
+//					ball->reflectDirection(BrickBallCollide.collision);
+//					// Remove the brick from the grid
+//					point newBrickUpleft;
+//					newBrickUpleft.x = uprLft.x + cols * config.brickWidth;
+//					newBrickUpleft.y = uprLft.y + rows * config.brickHeight;
+//					this->deleteBrick(newBrickUpleft);
+//				}
+//			}
+//		}
+//	}
+//}
 
-}

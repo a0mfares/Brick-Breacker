@@ -25,6 +25,7 @@ public:
 	Rect getBoundingBox() const override;
 	void setpoint(point r);
 	
+	
 	void  draw() const;
 	struct factor;
 	//factor checkcollison(Paddle* , Ball* ball);

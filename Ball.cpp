@@ -89,7 +89,7 @@ void Ball::moveball()
 
             // Check if the collision point is within the center half area of the paddle
             //bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > pGame->getpadle()->getBoundingBox().upperLeft.x + (config.padlewidth / 3)))
-            //    || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2*config.padlewidth) / 3));
+            //    || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2 * config.padlewidth) / 3));
 
             //if (isInCenterHalf) {
             //    // Reflect the ball vertically
@@ -108,6 +108,7 @@ void Ball::moveball()
                 Xinc = speed * std::cos(angle);
                 Yinc = speed * std::sin(angle);
 
+            
         }
 
         // Draw the game elements
@@ -128,39 +129,7 @@ void Ball::moveball()
         this->draw();
 
         // Check for arrow key input
-        kType2 = pGame->getWind()->GetKeyPress(cKeyData);
-        pGame->getWind()->SetPen(LAVENDER, 1);
-        pGame->getWind()->SetBrush(LAVENDER);
-
-        if (kType2 == ARROW) {
-            switch (cKeyData) {
-            case 4:
-                // Move paddle left
-                if (p.x > 10) {
-                    p.x -= 40;
-                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-                    pGame->getpadle()->setpoint(p);
-                }
-                break;
-
-            case 6:
-                // Move paddle right
-                if (p.x < config.windWidth - 200) {
-                    p.x += 40;
-                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-                    pGame->getpadle()->setpoint(p);
-                }
-                break;
-            }
-
-            // Draw the updated paddle
-            pGame->getpadle()->draw();
-
-          
-        }
-
-        // Update the screen buffer
-        pGame->getWind()->UpdateBuffer();
+       
     
 
     
@@ -199,7 +168,23 @@ void Ball::draw() const
 }
 
 
-//01069141516
+//float Ball::calculateReflectionAngle(Brick* brick) {
+//    // Get the bounding box of the brick
+//    Rect brickBoundingBox = brick->getBoundingBox();
+//
+//    // Get the current position of the ball
+//    point ballPosition = this->getPosition(); // Assuming getPosition() returns the current position
+//
+//    // Calculate the reflection angle based on the collision side
+//    if (ballPosition.y < brickBoundingBox.upperLeft.y || ballPosition.y > brickBoundingBox.lowerRight.y) {
+//        // Ball hit the top or bottom of the brick
+//        return M_PI - currentAngle; // Reflect vertically
+//    }
+//    else {
+//        // Ball hit the left or right of the brick
+//        return -currentAngle; // Reflect horizontally
+//    }
+//}
 
 
 

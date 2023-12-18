@@ -19,7 +19,7 @@ public:
 	int addBrick(BrickType brkType, point clickedPoint);
 	void deleteBrick(point clicked);
 	brick*** getbrickmatrix();
-	void collisonaction();
+	/*void collisionAction(Ball* ball);*/
 
 };
 

@@ -26,6 +26,45 @@ void Paddle::setpoint(point p)
 	uprLft = p;
 }
 
+void Paddle::padlemove()
+{
+    char cKeyData;
+    keytype  kType2;
+    kType2 = pGame->getWind()->GetKeyPress(cKeyData);
+    pGame->getWind()->SetPen(LAVENDER, 1);
+    pGame->getWind()->SetBrush(LAVENDER);
+
+    if (kType2 == ARROW) {
+        switch (cKeyData) {
+        case 4:
+            // Move paddle left
+            if (uprLft.x > 10) {
+                uprLft.x -= 40;
+                pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+                
+            }
+            break;
+
+        case 6:
+            // Move paddle right
+            if (uprLft.x < config.windWidth - 200) {
+                uprLft.x += 40;
+                pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+                
+            }
+            break;
+        }
+
+        // Draw the updated paddle
+        this->draw();
+
+
+    }
+
+    // Update the screen buffer
+    pGame->getWind()->UpdateBuffer();
+}
+
 Paddle::Rect Paddle::getBoundingBox() const
 {
     Rect boundingBox;

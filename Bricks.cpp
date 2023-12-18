@@ -68,7 +68,7 @@ void Rock::collisionAction()
 	auto BallBrickCollide = isColliding(pGame->getball(), this);
 	if (BallBrickCollide.collision) {
 		// Handle paddle-ball collision
-		Yinc = std::abs(Yinc);
+		Yinc = -(Yinc);
 		float brickCenterX = (uprLft.x + config.brickWidth) / 2.0f;
 		float offset = (uprLft.x - brickCenterX) / (config.brickWidth / 2.0f);
 
@@ -80,12 +80,12 @@ void Rock::collisionAction()
 		float angle = std::atan2(Yinc, Xinc);
 		angle = angle + bounceAngle * (3.1415926535 / 180.0f);
 		float speed = std::hypot(Xinc, Yinc);
-		Xinc = speed * std::cos(angle);
+		
 		Yinc = speed * std::sin(angle);
 		point ballupr;
 		ballupr.x = pGame->getball()->getBoundingBox().upperLeft.x;
 		ballupr.y = pGame->getball()->getBoundingBox().upperLeft.y;
-		ballupr.x += Xinc;
+		
 		ballupr.y += Yinc;
 		pGame->getball()->setpoint(ballupr);
 	}

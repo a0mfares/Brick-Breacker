@@ -278,7 +278,8 @@ void game::go()
 					
 				}
 				ballspot->moveball();
-				/*bricksGrid->collisonaction();*/
+				padlespot->padlemove();
+				//bricksGrid->collisonaction();
 
 				
 				
