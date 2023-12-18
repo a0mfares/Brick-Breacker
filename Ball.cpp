@@ -184,6 +184,11 @@ Ball::Rect Ball::getBoundingBox() const
     return boundingBox;
 }
 
+void Ball::setpoint(point r)
+{
+    uprLft = r;
+}
+
 void Ball::draw() const
 {
 	window* pWind = pGame->getWind();

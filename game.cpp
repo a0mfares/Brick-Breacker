@@ -193,6 +193,11 @@ Paddle* game::getpadle() const
 	return padlespot;
 }
 
+Ball* game::getball() const
+{
+	return ballspot;
+}
+
 toolbar* game::gettoolbarr() const
 {
 	return gameToolbar;
@@ -300,6 +305,8 @@ void game::go()
 					
 				}
 				ballspot->moveball();
+				/*bricksGrid->collisonaction();*/
+
 				
 				
 			} while (isplay && !ispause);

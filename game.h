@@ -68,6 +68,7 @@ public:
 
 	grid* getGrid() const;
 	Paddle* getpadle() const;
+	Ball* getball() const;
 	toolbar* gettoolbarr() const;
 	MODE getMode() const;
 	void setmode(MODE m);

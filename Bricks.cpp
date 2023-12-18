@@ -1,5 +1,6 @@
 #include "Bricks.h"
 #include "gameConfig.h"
+#include "game.h"
 
 ////////////////////////////////////////////////////  class brick  ///////////////////////////////////////
 brick::brick(point r_uprleft, int r_width, int r_height, game* r_pGame):
@@ -63,7 +64,31 @@ Rock::Rock(point r_uprleft, int r_width, int r_height, game* r_pGame) :
 
 void Rock::collisionAction()
 {
-	//TODO: Add collision action logic
+	
+	auto BallBrickCollide = isColliding(pGame->getball(), this);
+	if (BallBrickCollide.collision) {
+		// Handle paddle-ball collision
+		Yinc = std::abs(Yinc);
+		float brickCenterX = (uprLft.x + config.brickWidth) / 2.0f;
+		float offset = (uprLft.x - brickCenterX) / (config.brickWidth / 2.0f);
+
+
+		const float maxBounceAngle = 45.0f;  // Maximum bounce angle in degrees
+		float bounceAngle = maxBounceAngle * offset;
+
+		// Rotate the ball's direction by the calculated bounce angle
+		float angle = std::atan2(Yinc, Xinc);
+		angle = angle + bounceAngle * (3.1415926535 / 180.0f);
+		float speed = std::hypot(Xinc, Yinc);
+		Xinc = speed * std::cos(angle);
+		Yinc = speed * std::sin(angle);
+		point ballupr;
+		ballupr.x = pGame->getball()->getBoundingBox().upperLeft.x;
+		ballupr.y = pGame->getball()->getBoundingBox().upperLeft.y;
+		ballupr.x += Xinc;
+		ballupr.y += Yinc;
+		pGame->getball()->setpoint(ballupr);
+	}
 }
 
 Rock::Rect Rock::getBoundingBox() const

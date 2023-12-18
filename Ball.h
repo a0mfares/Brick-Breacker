@@ -23,6 +23,7 @@ public:
 	void collisionAction();
 	void moveball();
 	Rect getBoundingBox() const override;
+	void setpoint(point r);
 	
 	void  draw() const;
 	struct factor;
