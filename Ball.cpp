@@ -161,8 +161,7 @@ void Ball::moveball()
 
         // Update the screen buffer
         pGame->getWind()->UpdateBuffer();
-    
-
+        
     
 
 
