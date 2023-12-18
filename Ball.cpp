@@ -127,20 +127,6 @@ void Ball::moveball()
         pGame->getWind()->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
         pGame->getWind()->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
         this->draw();
-
-        // Check for arrow key input
-       
-    
-
-    
-
-
-   
-
-
-
-    
-
 }
 
 Ball::Rect Ball::getBoundingBox() const
