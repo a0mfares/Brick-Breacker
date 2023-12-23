@@ -231,6 +231,46 @@ void game::setpause(bool p)
 	ispause = p;
 }
 
+void game::setgameover(bool g)
+{
+	gameover = g;
+}
+
+void game::updatelive()
+{
+	point BallUpperleft;
+	BallUpperleft.x = config.windWidth / 2;
+	BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
+	point PadleUpperleft;
+	PadleUpperleft.x = (config.windWidth / 2) - (config.padlewidth / 2);
+	PadleUpperleft.y = config.paddleAreaHeight;
+
+	if (ballspot->getBoundingBox().lowerRight.y > config.windHeight && config.Lives>0) {
+		--config.Lives;
+		ballspot->setpoint(BallUpperleft);
+		padlespot->setpoint(PadleUpperleft);
+		ballspot->resetxyinc();
+		pWind->FlushKeyQueue();
+
+
+
+	}
+	if (config.Lives == 0) {
+		ballspot->deleteball();
+		padlespot->setpoint(PadleUpperleft);
+		ballspot->setpoint(BallUpperleft);
+		config.Lives = 3;
+		ballspot->draw();
+		padlespot->draw();
+		ballspot->resetxyinc();
+		
+
+		pWind->FlushKeyQueue();
+		gameover = true;
+		
+	}
+}
+
 string game::updateTIme()
 {
 	string timeStamp = "";
@@ -247,6 +287,18 @@ string game::updateTIme()
 
 
 	return timeStamp;
+}
+
+void game::statusbardraw()
+{
+	pWind->SetPen(config.statusBarColor, 1);
+	pWind->SetBrush(config.statusBarColor);
+	pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+	pWind->SetPen(BLACK, 1);
+	pWind->SetBrush(BLACK);
+	//pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
+	pWind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
+	pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
 }
 
 
@@ -266,46 +318,83 @@ void game::go()
 
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - Brick Breaker (CIE202-project) - - - - - - - - - -");
+
+
 	
 	do
 	{
+		
 		printMessage("Ready...");
+		/*pWind->FlushKeyQueue();*/
 		pWind->GetMouseClick(x, y);	//Get the coordinates of the user click
 		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
-			
+			if (gameover){
+				this->getWind()->SetPen(LAVENDER, 1);
+				this->getWind()->SetBrush(LAVENDER);
+				this->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				/*gameToolbar->draw();
+				bricksGrid->draw();
+				ballspot->draw();
+				padlespot->draw();*/
+			}
+		
 			//[1] If user clicks on the Toolbar
 			if (y >= 0 && y < config.toolBarHeight)
 			{
 				
 				gameToolbar->handleClick(x, y);
 			}
+			
 		}
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
 		{
-			
-			do
-			{
-				
-				pWind->GetMouseClick(x, y);
-
-				
-			//[1] If user clicks on the Toolbar
-				if ((y >= 0 && y < config.toolBarHeight)&& x>330)
+			char cKeyData;
+			keytype kType;
+			kType = pWind->GetKeyPress(cKeyData);
+			if (kType == ASCII && cKeyData == ' ') {
+				do
 				{
 
-					gameToolbar->handleClick(x, y);
-					
-				}
-				ballspot->moveball();
-				padlespot->padlemove();
-				//bricksGrid->collisonaction();
+					pWind->GetMouseClick(x, y);
+					kType = pWind->GetKeyPress(cKeyData);
 
+
+					//[1] If user clicks on the Toolbar
+					if ((y >= 0 && y < config.toolBarHeight) && x > 330)
+					{
+
+						gameToolbar->handleClick(x, y);
+
+					}
+
+					ballspot->moveball();
+					this->updatelive();
+					this->statusbardraw();
+
+					padlespot->padlemove();
+					//bricksGrid->collisonaction();
+
+					
+
+
+
+					count = 0;
+
+
+				} while (isplay  && !gameover);
 				
 				
-			} while (isplay && !ispause);
-			gameMode = MODE_DSIGN;
+				
+
+				gameMode = MODE_DSIGN;
+
+
+			}
+			
+			
+			
 			
 		}
 		

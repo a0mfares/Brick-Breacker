@@ -30,6 +30,8 @@ class game
 	bool isplay =false;
 	bool isExit = false;
 	bool ispause = false;
+	bool gameover = false;
+	int count = 0;
 	
 	
 	
@@ -75,7 +77,10 @@ public:
 	void setplay(bool p);
 	void setexit(bool e);
 	void setpause(bool p);
+	void setgameover(bool g);
+	void updatelive();
 	string updateTIme();
+	void statusbardraw();
 
 
 

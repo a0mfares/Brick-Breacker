@@ -13,6 +13,8 @@ class Ball : public  collidable
 	int Xinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
 	int Yinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
 	
+	
+	
 
 	
 	
@@ -24,6 +26,11 @@ public:
 	void moveball();
 	Rect getBoundingBox() const override;
 	void setpoint(point r);
+	void deleteball();
+	void resetxyinc();
+	void setxyinczero();
+	
+	
 	
 	
 	void  draw() const;

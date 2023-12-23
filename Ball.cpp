@@ -23,41 +23,21 @@ void Ball::collisionAction()
 
 void Ball::moveball()
 {
-
-    pGame->getWind()->SetBuffering(true);
     
-
-
-
-
-    char cKeyData;
-    keytype kType, kType2;
-    int BallCenterX = config.windWidth / 2;
-    int BallCenterY = config.paddleAreaHeight - config.BallRad;
-    bool isvertical = true;
-    point p = pGame->getpadle()->getpoint();
-   
-
-    
-    
-   
-    
-
-
-    // Assuming the Ball and Paddle classes have appropriate methods and attributes.
-
-    
-    
-    
-        pGame->getWind()->FlushKeyQueue();
-        kType = pGame->getWind()->GetKeyPress(cKeyData);
+        pGame->getWind()->SetBuffering(true);
+         pGame->getWind()->FlushKeyQueue();
+       
+        int BallCenterX = config.windWidth / 2;
+        int BallCenterY = config.paddleAreaHeight - config.BallRad;
+        bool isvertical = true;
+  
+        point p = pGame->getpadle()->getpoint();
 
         // Check for paddle-ball collision
         auto PadleBallCollide = isColliding(this, pGame->getpadle());
 
-        // Update ball position
-        uprLft.x += Xinc;
-        uprLft.y += Yinc;
+
+
 
         // Check for vertical boundary collision
         if (uprLft.y - BallRad <= config.toolBarHeight || PadleBallCollide.collision) {
@@ -68,11 +48,8 @@ void Ball::moveball()
             Yinc = -Yinc;
         }
 
-        
-        //draw lines showing the grid
-       /* pGame->getWind()->SetPen(LAVENDER, 1);
-        pGame->getWind()->SetBrush(LAVENDER);
-        pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);*/
+
+
 
         // Check for horizontal boundary collision
         if (uprLft.x - BallRad <= 0 || uprLft.x + BallRad >= config.windWidth - 10) {
@@ -88,15 +65,15 @@ void Ball::moveball()
             float offset = (uprLft.x - paddleCenterX) / (config.padlewidth / 2.0f);
 
             // Check if the collision point is within the center half area of the paddle
-            //bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > pGame->getpadle()->getBoundingBox().upperLeft.x + (config.padlewidth / 3)))
-            //    || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2 * config.padlewidth) / 3));
+            bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > pGame->getpadle()->getBoundingBox().upperLeft.x + (config.padlewidth / 3)))
+                || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2 * config.padlewidth) / 3));
 
-            //if (isInCenterHalf) {
-            //    // Reflect the ball vertically
-            //    Yinc = -std::abs(Yinc);
-            //    Xinc = 0;
-            //}
-            //else {
+            if (isInCenterHalf) {
+                // Reflect the ball vertically
+                Yinc = -std::abs(Yinc);
+                Xinc = 0;
+            }
+            else {
                 // Calculate the bounce angle based on the position of the ball relative to the paddle's center
                 const float maxBounceAngle = 45.0f;  // Maximum bounce angle in degrees
                 float bounceAngle = maxBounceAngle * offset;
@@ -108,7 +85,7 @@ void Ball::moveball()
                 Xinc = speed * std::cos(angle);
                 Yinc = speed * std::sin(angle);
 
-            
+            }
         }
 
         // Draw the game elements
@@ -118,15 +95,17 @@ void Ball::moveball()
         pGame->getGrid()->draw();
         pGame->gettoolbarr()->draw();
         pGame->getpadle()->draw();
-        pGame->getWind()->SetPen(config.statusBarColor, 1);
-        pGame->getWind()->SetBrush(config.statusBarColor);
-        pGame->getWind()->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
-        pGame->getWind()->SetPen(BLACK, 1);
-        pGame->getWind()->SetBrush(BLACK);
-        //pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
-        pGame->getWind()->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
-        pGame->getWind()->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
+        
+        // Update ball position
+        uprLft.x += Xinc;
+        uprLft.y += Yinc;
+
         this->draw();
+       
+        
+    
+
+       
 }
 
 Ball::Rect Ball::getBoundingBox() const
@@ -143,6 +122,35 @@ void Ball::setpoint(point r)
 {
     uprLft = r;
 }
+
+void Ball::deleteball()
+{
+   
+    pGame->getWind()->SetPen(LAVENDER, 1);
+    pGame->getWind()->SetBrush(LAVENDER);
+    pGame->getWind()->DrawCircle(uprLft.x, uprLft.y, width, FILLED);
+}
+
+void Ball::resetxyinc()
+{
+    float deflectionAngle = std::rand() % 46; // Random angle between 0 and 45 degrees
+    Xinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
+    Yinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
+
+}
+
+void Ball::setxyinczero()
+{
+    Xinc = 0;
+    Yinc = 0;
+
+}
+
+
+
+
+
+
 
 void Ball::draw() const
 {

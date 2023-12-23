@@ -28,7 +28,9 @@ void iconPlay::onClick()
 {
 	
 	pGame->setplay(true);
+	pGame->setgameover(false);
 	pGame->gameMode = game::MODE::MODE_PLAY;
+
 	
 }
 iconDel::iconDel(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
