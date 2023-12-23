@@ -25,68 +25,28 @@ void Ball::moveball()
 {
     
         pGame->getWind()->SetBuffering(true);
-         pGame->getWind()->FlushKeyQueue();
-       
-        int BallCenterX = config.windWidth / 2;
-        int BallCenterY = config.paddleAreaHeight - config.BallRad;
-        bool isvertical = true;
-  
-        point p = pGame->getpadle()->getpoint();
+        pGame->getWind()->FlushKeyQueue();
 
+       
         // Check for paddle-ball collision
         auto PadleBallCollide = isColliding(this, pGame->getpadle());
-
-
-
-
         // Check for vertical boundary collision
-        if (uprLft.y - BallRad <= config.toolBarHeight || PadleBallCollide.collision) {
-            // Adjust the ball's position to prevent it from sticking to the boundary
-            uprLft.y = (uprLft.y < config.toolBarHeight + BallRad) ? config.toolBarHeight + BallRad : PadleBallCollide.collisionPoint.y - (BallRad + 1);
 
+        if (uprLft.y - BallRad <= config.toolBarHeight || PadleBallCollide.collision) {
+          
             // Invert the vertical direction
             Yinc = -Yinc;
         }
-
-
-
+       
 
         // Check for horizontal boundary collision
         if (uprLft.x - BallRad <= 0 || uprLft.x + BallRad >= config.windWidth - 10) {
             // Invert the horizontal direction
             Xinc = -Xinc;
         }
+        this->reflectball();
+      
 
-        // Check for paddle collision
-        if (PadleBallCollide.collision) {
-            // Handle paddle-ball collision
-            Yinc = -std::abs(Yinc);
-            float paddleCenterX = (pGame->getpadle()->getBoundingBox().upperLeft.x + pGame->getpadle()->getBoundingBox().lowerRight.x) / 2.0f;
-            float offset = (uprLft.x - paddleCenterX) / (config.padlewidth / 2.0f);
-
-            // Check if the collision point is within the center half area of the paddle
-            bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > pGame->getpadle()->getBoundingBox().upperLeft.x + (config.padlewidth / 3)))
-                || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2 * config.padlewidth) / 3));
-
-            if (isInCenterHalf) {
-                // Reflect the ball vertically
-                Yinc = -std::abs(Yinc);
-                Xinc = 0;
-            }
-            else {
-                // Calculate the bounce angle based on the position of the ball relative to the paddle's center
-                const float maxBounceAngle = 45.0f;  // Maximum bounce angle in degrees
-                float bounceAngle = maxBounceAngle * offset;
-
-                // Rotate the ball's direction by the calculated bounce angle
-                float angle = std::atan2(Yinc, Xinc);
-                angle = angle + bounceAngle * (3.1415926535 / 180.0f);
-                float speed = std::hypot(Xinc, Yinc);
-                Xinc = speed * std::cos(angle);
-                Yinc = speed * std::sin(angle);
-
-            }
-        }
 
         // Draw the game elements
         pGame->getWind()->SetPen(LAVENDER, 1);
@@ -97,8 +57,9 @@ void Ball::moveball()
         pGame->getpadle()->draw();
         
         // Update ball position
+        
         uprLft.x += Xinc;
-        uprLft.y += Yinc;
+        uprLft.y += Yinc; 
 
         this->draw();
        
@@ -144,6 +105,100 @@ void Ball::setxyinczero()
     Xinc = 0;
     Yinc = 0;
 
+}
+
+void Ball::reflectball()
+{
+  
+    bool isvertical = true;
+
+    // Check for paddle-ball collision
+    auto PadleBallCollide = isColliding(this, pGame->getpadle());
+
+    
+
+    // Check for paddle collision
+    if (PadleBallCollide.collision) {
+
+
+        // Adjust the ball's position to prevent it from sticking to the boundary
+        uprLft.y = (uprLft.y < config.toolBarHeight + BallRad) ? config.toolBarHeight + BallRad : PadleBallCollide.collisionPoint.y - (BallRad + 1);
+
+        // Handle paddle-ball collision
+        Yinc = -std::abs(Yinc);
+        float paddleCenterX = (pGame->getpadle()->getBoundingBox().upperLeft.x + pGame->getpadle()->getBoundingBox().lowerRight.x) / 2.0f;
+        float offset = (uprLft.x - paddleCenterX) / (config.padlewidth / 2.0f);
+
+        // Check if the collision point is within the center half area of the paddle
+        bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > pGame->getpadle()->getBoundingBox().upperLeft.x + (config.padlewidth / 3)))
+            || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2 * config.padlewidth) / 3));
+
+        if (isInCenterHalf) {
+            // Reflect the ball vertically
+            Yinc = -std::abs(Yinc);
+            Xinc = 0;
+        }
+        else {
+            // Calculate the bounce angle based on the position of the ball relative to the paddle's center
+            const float maxBounceAngle = 45.0f;  // Maximum bounce angle in degrees
+            float bounceAngle = maxBounceAngle * offset;
+
+            // Rotate the ball's direction by the calculated bounce angle
+            float angle = std::atan2(Yinc, Xinc);
+            angle = angle + bounceAngle * (3.1415926535 / 180.0f);
+            float speed = std::hypot(Xinc, Yinc);
+            Xinc = speed * std::cos(angle);
+            Yinc = speed * std::sin(angle);
+
+        }
+    }
+}
+
+void Ball::reflectball(collidable* o)
+{
+    bool isvertical = true;
+
+    // Check for paddle-ball collision
+    auto PadleBallCollide = isColliding(this, o);
+
+
+
+    // Check for paddle collision
+    if (PadleBallCollide.collision) {
+
+
+        // Adjust the ball's position to prevent it from sticking to the boundary
+        uprLft.y = (uprLft.y < config.toolBarHeight + BallRad) ? config.toolBarHeight + BallRad : PadleBallCollide.collisionPoint.y - (BallRad + 1);
+
+        // Handle paddle-ball collision
+        Yinc = -std::abs(Yinc);
+        float paddleCenterX = (o->getBoundingBox().upperLeft.x + o->getBoundingBox().lowerRight.x) / 2.0f;
+        float offset = (uprLft.x - paddleCenterX) / ((config.windWidth - (o->getBoundingBox().upperLeft.x + o->getBoundingBox().lowerRight.x)) / 2.0f);
+        float width = (config.windWidth - (o->getBoundingBox().upperLeft.x + o->getBoundingBox().lowerRight.x)) - 30;
+
+        // Check if the collision point is within the center half area of the paddle
+        bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > o->getBoundingBox().upperLeft.x + (width / 3)))
+            || (PadleBallCollide.collisionPoint.x >= paddleCenterX && PadleBallCollide.collisionPoint.x < pGame->getpadle()->getBoundingBox().upperLeft.x + ((2 * width) / 3));
+
+        if (isInCenterHalf) {
+            // Reflect the ball vertically
+            Yinc = -std::abs(Yinc);
+            Xinc = 0;
+        }
+        else {
+            // Calculate the bounce angle based on the position of the ball relative to the paddle's center
+            const float maxBounceAngle = 45.0f;  // Maximum bounce angle in degrees
+            float bounceAngle = maxBounceAngle * offset;
+
+            // Rotate the ball's direction by the calculated bounce angle
+            float angle = std::atan2(Yinc, Xinc);
+            angle = angle + bounceAngle * (3.1415926535 / 180.0f);
+            float speed = std::hypot(Xinc, Yinc);
+            Xinc = speed * std::cos(angle);
+            Yinc = speed * std::sin(angle);
+
+        }
+    }
 }
 
 

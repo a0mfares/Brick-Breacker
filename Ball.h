@@ -29,6 +29,8 @@ public:
 	void deleteball();
 	void resetxyinc();
 	void setxyinczero();
+	void reflectball();
+	void reflectball(collidable* o);
 	
 	
 	
