@@ -72,7 +72,8 @@ iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 {}
 
 void iconLoad::onClick() {
-
+	
+	
 }
 
 
@@ -81,6 +82,7 @@ iconPause::iconPause(point r_lwrleft, int r_width, int r_height, game* r_pGame) 
 {}
 
 void iconPause::onClick() {
+	cout << 5 << endl;
 	pGame->setpause(true);
 	pGame->gameMode = game::MODE::MODE_DSIGN;
 }
@@ -182,9 +184,9 @@ toolbar::toolbar(point r_uprleft, int wdth, int hght, game* pG) :
 	iconsImages[ICON_ADD_ROCK] = "images\\ToolbarIcons\\RockIcon.jpg";
 	iconsImages[ICON_PLAY] = "images\\ToolbarIcons\\Play.jpg";
 	iconsImages[ICON_DEL] = "images\\ToolbarIcons\\deleteBrick.jpg";
-	iconsImages[ICON_SAVE] = "images\\ToolbarIcons\\Save-icon.jpg";
-	iconsImages[ICON_LOAD] = "images\\ToolbarIcons\\Upload.jpg";
 	iconsImages[ICON_PAUSE] = "images\\ToolbarIcons\\Pause.jpg";
+	iconsImages[ICON_LOAD] = "images\\ToolbarIcons\\Upload.jpg";
+	iconsImages[ICON_SAVE] = "images\\ToolbarIcons\\Save-icon.jpg";
 	iconsImages[ICON_EXIT] = "images\\ToolbarIcons\\ExitIcon.jpg";
 
 
@@ -207,11 +209,11 @@ toolbar::toolbar(point r_uprleft, int wdth, int hght, game* pG) :
 	p.x += config.iconWidth;
 	iconsList[ICON_DEL] = new iconDel(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
-	iconsList[ICON_SAVE] = new iconSave(p, config.iconWidth, height, pGame);
+	iconsList[ICON_PAUSE] = new iconPause(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
 	iconsList[ICON_LOAD] = new iconLoad(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
-	iconsList[ICON_PAUSE] = new iconPause(p, config.iconWidth, height, pGame);
+	iconsList[ICON_SAVE] = new iconSave(p, config.iconWidth, height, pGame);
 	p.x += config.iconWidth;
 	iconsList[ICON_EXIT] = new iconExit(p, config.iconWidth, height, pGame);
 
@@ -259,7 +261,7 @@ bool toolbar::handleClick(int x, int y)
 	//if division result is 0 ==> first icon is clicked, if 1 ==> 2nd icon and so on
 
 	int clickedIconIndex = (x / config.iconWidth);
-	
+	/*cout << clickedIconIndex;*/
 	iconsList[clickedIconIndex]->onClick();	//execute onClick action of clicled icon
 	
 

@@ -334,10 +334,14 @@ void game::go()
 				this->getWind()->SetPen(LAVENDER, 1);
 				this->getWind()->SetBrush(LAVENDER);
 				this->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				pWind->UpdateBuffer();
 				/*gameToolbar->draw();
 				bricksGrid->draw();
 				ballspot->draw();
 				padlespot->draw();*/
+				/*pWind->SetBrush(config.bkGrndColor);
+				pWind->SetPen(config.bkGrndColor, 1);
+				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight,FILLED);*/
 			}
 		
 			//[1] If user clicks on the Toolbar
@@ -383,7 +387,7 @@ void game::go()
 					count = 0;
 
 
-				} while (isplay  && !gameover);
+				} while (isplay  && !gameover && !ispause);
 				
 				
 				

@@ -72,5 +72,5 @@ collidable::collisionInfo collidable::isColliding(const collidable* obj1, const 
     collisionInfo.collision = true;
     return collisionInfo;
 }
-
+    
 
