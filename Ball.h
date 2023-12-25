@@ -31,6 +31,10 @@ public:
 	void setxyinczero();
 	void reflectball();
 	void reflectball(collidable* o);
+	void checkforboundies(collidable* o);
+	void updatepos();
+	void drawgameelements();
+
 	
 	
 	

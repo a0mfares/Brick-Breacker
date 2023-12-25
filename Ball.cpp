@@ -23,49 +23,17 @@ void Ball::collisionAction()
 
 void Ball::moveball()
 {
-    
-        pGame->getWind()->SetBuffering(true);
-        pGame->getWind()->FlushKeyQueue();
-
-       
-        // Check for paddle-ball collision
-        auto PadleBallCollide = isColliding(this, pGame->getpadle());
-        // Check for vertical boundary collision
-
-        if (uprLft.y - BallRad <= config.toolBarHeight || PadleBallCollide.collision) {
-          
-            // Invert the vertical direction
-            Yinc = -Yinc;
-        }
-       
-
-        // Check for horizontal boundary collision
-        if (uprLft.x - BallRad <= 0 || uprLft.x + BallRad >= config.windWidth - 10) {
-            // Invert the horizontal direction
-            Xinc = -Xinc;
-        }
-        this->reflectball();
-      
-
-
-        // Draw the game elements
-        pGame->getWind()->SetPen(LAVENDER, 1);
-        pGame->getWind()->SetBrush(LAVENDER);
-        pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
-        pGame->getGrid()->draw();
-        pGame->gettoolbarr()->draw();
-        pGame->getpadle()->draw();
-        
-        // Update ball position
-        
-        uprLft.x += Xinc;
-        uprLft.y += Yinc; 
-
-        this->draw();
-       
-        
-    
-
+    pGame->getWind()->SetBuffering(true);
+    pGame->getWind()->FlushKeyQueue();   
+    // Check for paddle-ball collision
+    this->checkforboundies(pGame->getpadle());
+    this->reflectball(pGame->getpadle());
+    // Draw the game elements
+    this->drawgameelements();
+    // Update ball position
+    this->updatepos();
+    //draw ball
+    this->draw();
        
 }
 
@@ -171,10 +139,11 @@ void Ball::reflectball(collidable* o)
         uprLft.y = (uprLft.y < config.toolBarHeight + BallRad) ? config.toolBarHeight + BallRad : PadleBallCollide.collisionPoint.y - (BallRad + 1);
 
         // Handle paddle-ball collision
+        float width = (o->getBoundingBox().lowerRight.x - o->getBoundingBox().upperLeft.x );
         Yinc = -std::abs(Yinc);
         float paddleCenterX = (o->getBoundingBox().upperLeft.x + o->getBoundingBox().lowerRight.x) / 2.0f;
-        float offset = (uprLft.x - paddleCenterX) / ((config.windWidth - (o->getBoundingBox().upperLeft.x + o->getBoundingBox().lowerRight.x)) / 2.0f);
-        float width = (config.windWidth - (o->getBoundingBox().upperLeft.x + o->getBoundingBox().lowerRight.x)) - 30;
+        float offset = (uprLft.x - paddleCenterX) / ((width) / 2.0f);
+        
 
         // Check if the collision point is within the center half area of the paddle
         bool isInCenterHalf = ((PadleBallCollide.collisionPoint.x <= paddleCenterX && PadleBallCollide.collisionPoint.x > o->getBoundingBox().upperLeft.x + (width / 3)))
@@ -199,6 +168,41 @@ void Ball::reflectball(collidable* o)
 
         }
     }
+}
+
+void Ball::checkforboundies(collidable* o)
+{
+    auto ObjectBallCollide = isColliding(this, o);
+    // Check for vertical boundary collision
+
+    if (uprLft.y - BallRad <= config.toolBarHeight || ObjectBallCollide.collision) {
+
+        // Invert the vertical direction
+        Yinc = -Yinc;
+    }
+
+
+    // Check for horizontal boundary collision
+    if (uprLft.x - BallRad <= 0 || uprLft.x + BallRad >= config.windWidth - 10) {
+        // Invert the horizontal direction
+        Xinc = -Xinc;
+    }
+}
+
+void Ball::updatepos()
+{
+    uprLft.x += Xinc;
+    uprLft.y += Yinc;
+}
+
+void Ball::drawgameelements()
+{
+    pGame->getWind()->SetPen(LAVENDER, 1);
+    pGame->getWind()->SetBrush(LAVENDER);
+    pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+    pGame->getGrid()->draw();
+    pGame->gettoolbarr()->draw();
+    pGame->getpadle()->draw();
 }
 
 
