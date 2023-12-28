@@ -31,7 +31,7 @@ class game
 	bool isExit = false;
 	bool ispause = false;
 	bool gameover = false;
-	int count = 0;
+	int COUNT = 0;
 	
 	
 	

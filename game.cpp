@@ -260,8 +260,8 @@ void game::updatelive()
 		padlespot->setpoint(PadleUpperleft);
 		ballspot->setpoint(BallUpperleft);
 		config.Lives = 3;
-		ballspot->draw();
-		padlespot->draw();
+		/*ballspot->draw();
+		padlespot->draw();*/
 		ballspot->resetxyinc();
 		
 
@@ -330,19 +330,7 @@ void game::go()
 		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
-			if (gameover){
-				this->getWind()->SetPen(LAVENDER, 1);
-				this->getWind()->SetBrush(LAVENDER);
-				this->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
-				pWind->UpdateBuffer();
-				/*gameToolbar->draw();
-				bricksGrid->draw();
-				ballspot->draw();
-				padlespot->draw();*/
-				/*pWind->SetBrush(config.bkGrndColor);
-				pWind->SetPen(config.bkGrndColor, 1);
-				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight,FILLED);*/
-			}
+			
 		
 			//[1] If user clicks on the Toolbar
 			if (y >= 0 && y < config.toolBarHeight)
@@ -350,13 +338,26 @@ void game::go()
 				
 				gameToolbar->handleClick(x, y);
 			}
-			
+			if (gameover) {
+
+				pWind->SetPen(LAVENDER, 1);
+				pWind->SetBrush(LAVENDER);
+				pWind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+				gameToolbar->draw();
+				bricksGrid->draw();
+				ballspot->draw();
+				padlespot->draw();
+				pWind->UpdateBuffer();
+
+
+			}
 		}
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
 		{
 			char cKeyData;
 			keytype kType;
 			kType = pWind->GetKeyPress(cKeyData);
+			COUNT = 0;
 			if (kType == ASCII && cKeyData == ' ') {
 				do
 				{
@@ -384,7 +385,7 @@ void game::go()
 
 
 
-					count = 0;
+					
 
 
 				} while (isplay  && !gameover && !ispause);
