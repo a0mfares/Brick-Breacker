@@ -38,6 +38,7 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	bool isPlaying = false;
 	int Score = 0;
 	int Lives = 3;
+
 	
 
 	

@@ -12,14 +12,18 @@ class grid:public drawable
 	brick*** brickMatrix;		//2D array of brick pointers
 
 	int rows, cols;
+	
+	
 public:
+	point index;
 	grid(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	~grid();
 	void draw() const;
 	int addBrick(BrickType brkType, point clickedPoint);
 	void deleteBrick(point clicked);
 	brick*** getbrickmatrix();
-	/*void collisionAction(Ball* ball);*/
+	void collisionAction();
+	void deleteBrickOncollison(point index);
 
 };
 

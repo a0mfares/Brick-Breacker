@@ -98,10 +98,11 @@ void grid::deleteBrick(point clicked)
 	point newBrickUpleft;
 	newBrickUpleft.x = uprLft.x + gridCellColIndex * config.brickWidth;
 	newBrickUpleft.y = uprLft.y + gridCellRowIndex * config.brickHeight;
-	cout << newBrickUpleft.x << endl << newBrickUpleft.y << endl;
+	
 	
 	if (brickMatrix[gridCellRowIndex][gridCellColIndex] != nullptr) {
 		delete brickMatrix[gridCellRowIndex][gridCellColIndex];
+		cout << newBrickUpleft.x << endl << newBrickUpleft.y << endl;
 		brickMatrix[gridCellRowIndex][gridCellColIndex] = nullptr;
 		pGame->getWind()->SetPen(LAVENDER, 1);
 		pGame->getWind()->SetBrush(LAVENDER);
@@ -115,25 +116,51 @@ brick*** grid::getbrickmatrix()
 	return brickMatrix;
 }
 
-//void grid::collisionAction(Ball* ball) {
-//	// Iterate through the bricks and check for collisions with the ball
-//	for (int i = 0; i < rows; i++) {
-//		for (int j = 0; j < cols; j++) {
-//			if (brickMatrix[i][j] != nullptr) {
-//				auto BrickBallCollide = brickMatrix[i][j]-> isColliding(ball, brickMatrix[i][j]);
-//				if (BrickBallCollide.collision) {
-//					// Handle brick-ball collision
-//					brickMatrix[i][j]->collisionAction();
-//					// Reflect the ball's direction
-//					ball->reflectDirection(BrickBallCollide.collision);
-//					// Remove the brick from the grid
-//					point newBrickUpleft;
-//					newBrickUpleft.x = uprLft.x + cols * config.brickWidth;
-//					newBrickUpleft.y = uprLft.y + rows * config.brickHeight;
-//					this->deleteBrick(newBrickUpleft);
-//				}
-//			}
-//		}
-//	}
-//}
+void grid::collisionAction()
+{
+	
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			if (brickMatrix[i][j] != nullptr) {
+				auto BrickBallCollide = brickMatrix[i][j]->isColliding(pGame->getball(), brickMatrix[i][j]);
+				if (BrickBallCollide.collision) {
+					// Handle brick-ball collision
+					brickMatrix[i][j]->collisionAction();
+					// Reflect the ball's direction
+
+					pGame->getball()->reflectball(brickMatrix[i][j]);
+						
+
+					/*point index;*/
+					index.x = i;
+					index.y = j;
+					if (brickMatrix[i][j]->stren==0)
+					this->deleteBrickOncollison(index);
+						
+					
+
+				}
+			}
+		}
+	}
+}
+
+void grid::deleteBrickOncollison(point index)
+
+{
+	int gridCellRowIndex = index.x;
+	int gridCellColIndex = index.y;
+	point newBrickUpleft;
+	newBrickUpleft.x = uprLft.x + gridCellRowIndex * config.brickWidth;
+	newBrickUpleft.y = uprLft.y + gridCellColIndex * config.brickHeight;
+
+	if (brickMatrix[gridCellRowIndex][gridCellColIndex] != nullptr) {
+		delete brickMatrix[gridCellRowIndex][gridCellColIndex];
+		brickMatrix[gridCellRowIndex][gridCellColIndex] = nullptr;
+		pGame->getWind()->SetPen(LAVENDER, 1);
+		pGame->getWind()->SetBrush(LAVENDER);
+		pGame->getWind()->DrawRectangle(newBrickUpleft.x, newBrickUpleft.y, newBrickUpleft.x + config.brickWidth, newBrickUpleft.y + config.brickHeight, FILLED);
+	}
+}
+
 

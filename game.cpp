@@ -379,7 +379,7 @@ void game::go()
 					this->statusbardraw();
 
 					padlespot->padlemove();
-					//bricksGrid->collisonaction();
+					bricksGrid->collisionAction();
 
 					
 
