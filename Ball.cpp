@@ -174,7 +174,7 @@ void Ball::draw() const
 
 	window* pWind = pGame->getWind();
     color c;
-    config.fired = true;
+    
     if (config.fired) {
         c = RED;
     }

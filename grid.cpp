@@ -160,6 +160,7 @@ void grid::deleteBrickOncollison(point index)
 	if (brickMatrix[gridCellRowIndex][gridCellColIndex] != nullptr) {
 		delete brickMatrix[gridCellRowIndex][gridCellColIndex];
 		brickMatrix[gridCellRowIndex][gridCellColIndex] = nullptr;
+		
 		pGame->getWind()->SetPen(LAVENDER, 1);
 		pGame->getWind()->SetBrush(LAVENDER);
 		pGame->getWind()->DrawRectangle(newBrickUpleft.x, newBrickUpleft.y, newBrickUpleft.x + config.brickWidth, newBrickUpleft.y + config.brickHeight, FILLED);
