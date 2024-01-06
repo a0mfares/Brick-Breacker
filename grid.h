@@ -2,6 +2,7 @@
 
 #include "drawable.h"
 #include "Bricks.h"
+#include "collectable.h"
 
 
 class game;
@@ -22,8 +23,9 @@ public:
 	int addBrick(BrickType brkType, point clickedPoint);
 	void deleteBrick(point clicked);
 	brick*** getbrickmatrix();
-	void collisionAction();
+	point collisionAction();
 	void deleteBrickOncollison(point index);
+	
 
 };
 

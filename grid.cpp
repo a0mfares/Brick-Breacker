@@ -1,6 +1,8 @@
 #include "grid.h"
 #include "game.h"
 #include "gameConfig.h"
+#include "PowerUps.h"
+
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	drawable(r_uprleft, wdth, hght, pG)
@@ -116,7 +118,7 @@ brick*** grid::getbrickmatrix()
 	return brickMatrix;
 }
 
-void grid::collisionAction()
+point grid::collisionAction()
 {
 	
 	for (int i = 0; i < rows; i++) {
@@ -136,18 +138,19 @@ void grid::collisionAction()
 					index.y = j;
 					if (brickMatrix[i][j]->stren==0)
 					this->deleteBrickOncollison(index);
-						
 					
-
+			
 				}
 			}
 		}
 	}
+	return index;
 }
 
 void grid::deleteBrickOncollison(point index)
 
 {
+	
 	int gridCellRowIndex = index.x;
 	int gridCellColIndex = index.y;
 	point newBrickUpleft;
@@ -161,6 +164,42 @@ void grid::deleteBrickOncollison(point index)
 		pGame->getWind()->SetBrush(LAVENDER);
 		pGame->getWind()->DrawRectangle(newBrickUpleft.x, newBrickUpleft.y, newBrickUpleft.x + config.brickWidth, newBrickUpleft.y + config.brickHeight, FILLED);
 	}
+	
+	
+
 }
+
+
+
+//void grid::randomPoint()
+//{
+//	point randomPoint;
+//	randomPoint.x = uprLft.x + (rand() % (config.windWidth / config.brickWidth)) * config.brickWidth;
+//	randomPoint.y = uprLft.y + (rand() % (config.gridHeight / config.brickHeight)) * config.brickHeight;
+//	BrickType randomBrickType = static_cast<BrickType>(rand() % 3);
+//	int gridCellRowIndex = (randomPoint.y - uprLft.y) / config.brickHeight;
+//	int gridCellColIndex = (randomPoint.x - uprLft.x) / config.brickWidth;
+//
+//	// Now, align the upper left corner of the new brick with the corner of the clicked grid cell
+//	point newBrickUpleft;
+//	newBrickUpleft.x = uprLft.x + gridCellColIndex * config.brickWidth;
+//	newBrickUpleft.y = uprLft.y + gridCellRowIndex * config.brickHeight;
+//
+//	switch (randomBrickType)
+//	{
+//	case BRK_NRM: // The new brick to add is Normal Brick
+//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new normalBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+//		break;
+//	case BRK_HRD: // The new brick to add is Hard Brick
+//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new hardBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+//		break;
+//	case BRK_ROCK: // The new brick to add is Rock
+//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new Rock(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+//		break;
+//		// TODO: Handle more types
+//	}
+//	
+//
+//}
 
 

@@ -123,6 +123,12 @@
     </ClCompile>
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="collectable.cpp">
+      <Filter>Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUps.cpp">
+      <Filter>PowerUps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -202,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="collectable.h">
+      <Filter>Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUps.h">
+      <Filter>PowerUps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base Classes">
@@ -215,6 +227,9 @@
     </Filter>
     <Filter Include="Bricks Classes">
       <UniqueIdentifier>{5e150dff-8a89-44f3-b58a-731df9cea925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PowerUps">
+      <UniqueIdentifier>{49e3841f-5e8f-4a70-8a07-034bd1b918c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

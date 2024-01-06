@@ -6,6 +6,7 @@ using namespace std;
 #include <thread>  
 #include <chrono>
 #include <iomanip>
+#include "PowerUps.h"
 
 
 game::game()
@@ -330,14 +331,18 @@ void game::go()
 		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
-			
-		
+			point trial;
+			trial.x = 50;
+			trial.y = 50;
+			Magnet ball = Magnet(trial, config.collectW, config.collectH, this);
+			ball.draw();
 			//[1] If user clicks on the Toolbar
 			if (y >= 0 && y < config.toolBarHeight)
 			{
 				
 				gameToolbar->handleClick(x, y);
 			}
+			
 			if (gameover) {
 
 				pWind->SetPen(LAVENDER, 1);
@@ -345,6 +350,7 @@ void game::go()
 				pWind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
 				gameToolbar->draw();
 				bricksGrid->draw();
+				
 				ballspot->draw();
 				padlespot->draw();
 				pWind->UpdateBuffer();
@@ -380,7 +386,7 @@ void game::go()
 
 					padlespot->padlemove();
 					bricksGrid->collisionAction();
-
+					
 					
 
 
