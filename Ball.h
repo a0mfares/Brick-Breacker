@@ -10,7 +10,7 @@ class Ball : public  collidable
 	int BallRad = 10;
 	// Bounce back with a deflection angle between 0 and 45 degrees
 	float deflectionAngle = std::rand() % 46; // Random angle between 0 and 45 degrees
-	int Xinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
+	int Xinc = BallRad * 3 * std::sin(deflectionAngle * (3.1415926535 / 180.0f));
 	int Yinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
 	
 	

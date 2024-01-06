@@ -63,7 +63,7 @@ void Ball::deleteball()
 void Ball::resetxyinc()
 {
     float deflectionAngle = std::rand() % 46; // Random angle between 0 and 45 degrees
-    Xinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
+    Xinc = BallRad * 3 * std::sin(deflectionAngle * (3.1415926535 / 180.0f));
     Yinc = BallRad * 3 * std::cos(deflectionAngle * (3.1415926535 / 180.0f));
 
 }
@@ -112,11 +112,11 @@ void Ball::reflectball()
             float bounceAngle = maxBounceAngle * offset;
 
             // Rotate the ball's direction by the calculated bounce angle
-            float angle = std::atan2(Yinc, Xinc);
+            float angle = atan2(Yinc, Xinc);
             angle = angle + bounceAngle * (3.1415926535 / 180.0f);
             float speed = max(hypot(Yinc, Xinc),20);
-            Xinc = speed * std::cos(angle);
-            Yinc = speed * std::sin(angle);
+            Xinc = speed * cos(angle);
+            Yinc = speed * sin(angle);
 
         }
     }
@@ -206,18 +206,4 @@ void Ball::draw() const
 //}
 
 
-
-//void Ball::ballmotion()
-//{
-//	int Xinc = BallRad, Yinc = BallRad;
-//	//If the ball hits the screen boundaries, negate the increment value.
-//	if ((uprLft.x <= BallRad) || (uprLft.x >= config.windWidth - BallRad))
-//		Xinc = -Xinc;
-//	if ((uprLft.y <= BallRad) || (uprLft.y >= config.windHeight - BallRad))
-//		Yinc = -Yinc;
-//
-//	//Shift the ball center in both X and Y directions
-//	uprLft.x += Xinc / 2;
-//	uprLft.y += Yinc / 2;
-//}
 
