@@ -41,3 +41,10 @@ public:
     void collected();
     RectC getBoundingBox() const;
 };
+
+class MultipleBalls : public PowerUps {
+public:
+    MultipleBalls(point r_uprleft, int r_width, int r_height, game* r_pGame);
+    void collected();
+    RectC getBoundingBox() const;
+};
