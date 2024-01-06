@@ -157,10 +157,10 @@ point grid::collisionAction()
 					{
 						point newpoint;
 						newpoint = brickMatrix[i][j]->getpoint();
-						colected[0]->setpoint(newpoint);
+						
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2) {
-
+							colected[0]->setpoint(newpoint);
 							colected[0]->draw();
 							config.getcollected = true;
 							config.breaked = 0;
