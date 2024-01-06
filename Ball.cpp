@@ -171,9 +171,17 @@ void Ball::drawgameelements()
 
 void Ball::draw() const
 {
+
 	window* pWind = pGame->getWind();
-	pWind->SetPen(BLACK, 1);
-	pWind->SetBrush(BLACK);
+    color c;
+    config.fired = true;
+    if (config.fired) {
+        c = RED;
+    }
+    else
+        c = BLACK;
+	pWind->SetPen(c, 1);
+	pWind->SetBrush(c);
 	pWind->DrawCircle(uprLft.x, uprLft.y, width,FILLED);
 
 }

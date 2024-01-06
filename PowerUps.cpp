@@ -10,11 +10,11 @@ FireBall::FireBall(point r_uprleft, int r_width, int r_height, game* r_pGame) : 
 	imageName = "images\\PowerUps\\FireBall.jpg";
 }
 
-void FireBall::collected()
+void FireBall:: collisionAction() 
 {
 	auto paddle = pGame->getpadle();
-	bool iscollected = isCollected(this, paddle);
-	if (iscollected) {
+	auto iscollected = isColliding(this, paddle);
+	if (iscollected.collision) {
 		auto wind = pGame->getWind();
 		auto ball = pGame->getball();
 		ball->deleteball();
@@ -23,9 +23,9 @@ void FireBall::collected()
 	}
 }
 
-FireBall::RectC FireBall::getBoundingBox() const
+FireBall::Rect FireBall::getBoundingBox() const
 {
-	RectC boundingBox;
+	Rect boundingBox;
 	boundingBox.upperLeft.x = uprLft.x;
 	boundingBox.upperLeft.y = uprLft.y;
 	boundingBox.lowerRight.x = uprLft.x;
@@ -38,18 +38,18 @@ WindGlide::WindGlide(point r_uprleft, int r_width, int r_height, game* r_pGame) 
 	imageName = "images\\PowerUps\\WindGlide.jpg";
 }
 
-void WindGlide::collected()
+void WindGlide::collisionAction()
 {
 	auto paddle = pGame->getpadle();
-	bool iscollected = isCollected(this, paddle);
-	if (iscollected) {
+	auto iscollected = isColliding(this, paddle);
+	if (iscollected.collision) {
 		
 	}
 
 }
-WindGlide::RectC WindGlide::getBoundingBox() const
+WindGlide::Rect WindGlide::getBoundingBox() const
 {
-	RectC boundingBox;
+	Rect boundingBox;
 	boundingBox.upperLeft.x = uprLft.x;
 	boundingBox.upperLeft.y = uprLft.y;
 	boundingBox.lowerRight.x = uprLft.x;
@@ -62,18 +62,18 @@ WidePaddle::WidePaddle(point r_uprleft, int r_width, int r_height, game* r_pGame
 	imageName = "images\\PowerUps\\WidePaddle.jpeg";
 }
 
-void WidePaddle::collected()
+void WidePaddle::collisionAction()
 {
 	auto paddle = pGame->getpadle();
-	bool iscollected = isCollected(this, paddle);
-	if (iscollected) {
+	auto iscollected = isColliding(this, paddle);
+	if (iscollected.collision) {
 
 	}
 }
 
-WidePaddle::RectC WidePaddle::getBoundingBox() const
+WidePaddle::Rect WidePaddle::getBoundingBox() const
 {
-	RectC boundingBox;
+	Rect boundingBox;
 	boundingBox.upperLeft.x = uprLft.x;
 	boundingBox.upperLeft.y = uprLft.y;
 	boundingBox.lowerRight.x = uprLft.x;
@@ -86,18 +86,18 @@ Magnet::Magnet(point r_uprleft, int r_width, int r_height, game* r_pGame) : Powe
 	imageName = "images\\PowerUps\\Magnet.jpeg";
 }
 
-void Magnet::collected()
+void Magnet::collisionAction()
 {
 	auto paddle = pGame->getpadle();
-	bool iscollected = isCollected(this, paddle);
-	if (iscollected) {
+	auto iscollected = isColliding(this, paddle);
+	if (iscollected.collision) {
 
 	}
 }
 
-Magnet::RectC Magnet::getBoundingBox() const
+Magnet::Rect Magnet::getBoundingBox() const
 {
-	RectC boundingBox;
+	Rect boundingBox;
 	boundingBox.upperLeft.x = uprLft.x;
 	boundingBox.upperLeft.y = uprLft.y;
 	boundingBox.lowerRight.x = uprLft.x;
@@ -109,18 +109,18 @@ MultipleBalls::MultipleBalls(point r_uprleft, int r_width, int r_height, game* r
 {
 }
 
-void MultipleBalls::collected()
+void MultipleBalls::collisionAction()
 {
 	auto paddle = pGame->getpadle();
-	bool iscollected = isCollected(this, paddle);
-	if (iscollected) {
+	auto iscollected = isColliding(this, paddle);
+	if (iscollected.collision) {
 
 	}
 }
 
-MultipleBalls::RectC MultipleBalls::getBoundingBox() const
+MultipleBalls::Rect MultipleBalls::getBoundingBox() const
 {
-	RectC boundingBox;
+	Rect boundingBox;
 	boundingBox.upperLeft.x = uprLft.x;
 	boundingBox.upperLeft.y = uprLft.y;
 	boundingBox.lowerRight.x = uprLft.x;

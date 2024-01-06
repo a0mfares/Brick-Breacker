@@ -56,6 +56,12 @@ void hardBrick::collisionAction()
 		stren--;
 		config.Score++;
 	}
+	if (config.fired && brickball.collision) {
+		stren--;
+		stren--;
+		stren--;
+		config.Score++;
+	}
 	
 }
 
@@ -81,6 +87,13 @@ Rock::Rock(point r_uprleft, int r_width, int r_height, game* r_pGame) :
 
 void Rock::collisionAction()
 {
+	auto brickball = isColliding(pGame->getball(), this);
+	
+	
+		if (brickball.collision && config.fired) {
+			stren--;
+			config.Score++;
+		}
 	
 	
 }

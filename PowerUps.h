@@ -18,33 +18,33 @@ public:
 class FireBall : public PowerUps {
 public:
     FireBall(point r_uprleft, int r_width, int r_height, game* r_pGame);
-    void collected();
-    RectC getBoundingBox() const;
+    void collisionAction()  ;
+    Rect getBoundingBox() const;
 };
 
 class WindGlide : public PowerUps {
 public:
     WindGlide(point r_uprleft, int r_width, int r_height, game* r_pGame);
-    void collected();
-    RectC getBoundingBox() const;
+    void collisionAction() ;
+    Rect getBoundingBox() const override;
 };
 
 class WidePaddle : public PowerUps {
 public:
     WidePaddle(point r_uprleft, int r_width, int r_height, game* r_pGame);
-    void collected();
-    RectC getBoundingBox() const;
+    void collisionAction() ;
+    Rect getBoundingBox() const override;
 };
 class Magnet : public PowerUps {
 public:
     Magnet(point r_uprleft, int r_width, int r_height, game* r_pGame);
-    void collected();
-    RectC getBoundingBox() const;
+    void collisionAction() ;
+    Rect getBoundingBox() const override;
 };
 
 class MultipleBalls : public PowerUps {
 public:
     MultipleBalls(point r_uprleft, int r_width, int r_height, game* r_pGame);
-    void collected();
-    RectC getBoundingBox() const;
+    void collisionAction() ;
+    Rect getBoundingBox() const override;
 };

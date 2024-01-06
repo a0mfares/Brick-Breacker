@@ -136,7 +136,7 @@ point grid::collisionAction()
 					/*point index;*/
 					index.x = i;
 					index.y = j;
-					if (brickMatrix[i][j]->stren==0)
+					if (brickMatrix[i][j]->stren<=0)
 					this->deleteBrickOncollison(index);
 					
 			
