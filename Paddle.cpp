@@ -33,26 +33,57 @@ void Paddle::padlemove()
     kType2 = pGame->getWind()->GetKeyPress(cKeyData);
     pGame->getWind()->SetPen(LAVENDER, 1);
     pGame->getWind()->SetBrush(LAVENDER);
-
+    if (config.speedUp) {
+        movementSpeed = 30;
+    }
+    else if(config.speedDown){
+        movementSpeed = 10;
+    }
+    else {
+        movementSpeed = 20;
+    }
     if (kType2 == ARROW) {
-        switch (cKeyData) {
-        case 4:
-            // Move paddle left
-            if (uprLft.x > 10) {
-                uprLft.x -= 40;
-                pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-                
-            }
-            break;
+        if (config.reversed) {
+            switch (cKeyData) {
+            case 4:
+                // Move paddle left
+                if (uprLft.x > 10) {
+                    uprLft.x += movementSpeed * 3;
+                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
 
-        case 6:
-            // Move paddle right
-            if (uprLft.x < config.windWidth - 200) {
-                uprLft.x += 40;
-                pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-                
+                }
+                break;
+
+            case 6:
+                // Move paddle right
+                if (uprLft.x < config.windWidth - 200) {
+                    uprLft.x -= movementSpeed * 3;
+                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+
+                }
+                break;
             }
-            break;
+        }
+        else {
+            switch (cKeyData) {
+            case 4:
+                // Move paddle left
+                if (uprLft.x > 10) {
+                    uprLft.x -= movementSpeed * 3;
+                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+
+                }
+                break;
+
+            case 6:
+                // Move paddle right
+                if (uprLft.x < config.windWidth - 200) {
+                    uprLft.x += movementSpeed * 3;
+                    pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
+
+                }
+                break;
+            }
         }
 
         // Draw the updated paddle

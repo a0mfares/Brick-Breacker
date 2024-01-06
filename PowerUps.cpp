@@ -43,7 +43,7 @@ void WindGlide::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-		
+		config.speedUp = true;
 	}
 
 }
@@ -67,7 +67,7 @@ void WidePaddle::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-
+		config.widen = true;
 	}
 }
 
@@ -91,7 +91,10 @@ void Magnet::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-
+		auto ball = pGame->getball();
+		ball->deleteball();
+		ball->setxyinczero();
+		ball->draw();
 	}
 }
 
@@ -114,7 +117,17 @@ void MultipleBalls::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-
+		auto ball = pGame->getball();
+		ball->draw();
+		point BallUpperleft;
+		BallUpperleft.x = config.windWidth / 2 - 50;
+		BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
+		ball->setpoint(BallUpperleft);
+		ball->draw();
+		BallUpperleft.x = config.windWidth / 2 + 50;
+		BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
+		ball->setpoint(BallUpperleft);
+		ball->draw();
 	}
 }
 

@@ -35,6 +35,8 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	int	iconWidth=70;			//Width of each icon in toolbar 	
 	int padleheight = int(paddleAreaHeight / 30);
 	int padlewidth = 150;
+	int widenWidth = 200;
+	int shrinkenWidth = 100;
 	bool isPlaying = false;
 	int Score = 0;
 	int Lives = 3;
@@ -42,7 +44,11 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	int breaked = 0;
 	int collectW = 50;
 	int collectH = 50;
-	
+	bool speedUp = false;
+	bool speedDown = false;
+	bool widen = false;
+	bool reversed = false;
+	bool shrink = false;
 
 	
 	

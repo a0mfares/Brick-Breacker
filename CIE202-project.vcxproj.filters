@@ -129,6 +129,9 @@
     <ClCompile Include="PowerUps.cpp">
       <Filter>PowerUps</Filter>
     </ClCompile>
+    <ClCompile Include="PowerDowns.cpp">
+      <Filter>PowerUps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -212,6 +215,9 @@
       <Filter>Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="PowerUps.h">
+      <Filter>PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerDowns.h">
       <Filter>PowerUps</Filter>
     </ClInclude>
   </ItemGroup>

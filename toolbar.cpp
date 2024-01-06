@@ -53,7 +53,7 @@ void iconDel::onClick()
 		pGrid->draw();
 		t = pGame->getMouseClick(x, y);
 	}
-	pGame->printMessage("");
+	pGame->printMessage("Ready...");
 
 	
 
@@ -110,7 +110,7 @@ void iconAddNormalBrick::onClick()
 		t = pGame->getMouseClick(x, y);
 	}
 
-	pGame->printMessage("");
+	pGame->printMessage("Ready...");
 
 }
 
@@ -136,7 +136,7 @@ void iconAddHardBrick::onClick()
 		pGrid->draw();
 		t = pGame->getMouseClick(x, y);
 	}
-	pGame->printMessage("");
+	pGame->printMessage("Ready...");
 
 }
 
@@ -162,7 +162,7 @@ void iconAddRock::onClick()
 		pGrid->draw();
 		t = pGame->getMouseClick(x, y);
 	}
-	pGame->printMessage("");
+	pGame->printMessage("Ready...");
 
 }
 

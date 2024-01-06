@@ -56,7 +56,16 @@ game::game()
 	point PadleUpperleft;
 	PadleUpperleft.x = (config.windWidth / 2) - (config.padlewidth / 2);
 	PadleUpperleft.y = config.paddleAreaHeight;
-	padlespot = new Paddle(PadleUpperleft, config.padlewidth, config.padleheight, this);
+	
+	if (config.widen) {
+		padlespot = new Paddle(PadleUpperleft, config.widenWidth, config.padleheight, this);
+	}
+	else if(config.shrink) {
+		padlespot = new Paddle(PadleUpperleft, config.shrinkenWidth, config.padleheight, this);
+	}
+	else {
+		padlespot = new Paddle(PadleUpperleft, config.padlewidth, config.padleheight, this);
+	}
 	
 	padlespot->draw();
 
@@ -320,22 +329,18 @@ void game::go()
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - Brick Breaker (CIE202-project) - - - - - - - - - -");
 
-
+	printMessage("Ready...");
 	
 	do
 	{
 		
-		printMessage("Ready...");
+		
 		/*pWind->FlushKeyQueue();*/
 		pWind->GetMouseClick(x, y);	//Get the coordinates of the user click
 		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
-			point trial;
-			trial.x = 50;
-			trial.y = 50;
-			Magnet ball = Magnet(trial, config.collectW, config.collectH, this);
-			ball.draw();
+			
 			//[1] If user clicks on the Toolbar
 			if (y >= 0 && y < config.toolBarHeight)
 			{
@@ -358,8 +363,10 @@ void game::go()
 
 			}
 		}
+		
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
 		{
+			
 			char cKeyData;
 			keytype kType;
 			kType = pWind->GetKeyPress(cKeyData);
@@ -383,7 +390,7 @@ void game::go()
 					ballspot->moveball();
 					this->updatelive();
 					this->statusbardraw();
-
+				
 					padlespot->padlemove();
 					bricksGrid->collisionAction();
 					

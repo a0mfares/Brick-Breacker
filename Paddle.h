@@ -3,7 +3,7 @@
 
 class Paddle :public collidable
 {
-	int movementSpeed = 15;
+	int movementSpeed = 0;
 	game* Game;
 	
 public:
