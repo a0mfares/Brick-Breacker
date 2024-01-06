@@ -220,6 +220,45 @@
     <ClInclude Include="PowerDowns.h">
       <Filter>PowerUps</Filter>
     </ClInclude>
+    <ClInclude Include="libXL\include\enum.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IAutoFilterT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IBookT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IConditionalFormatT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IConditionalFormattingT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IFilterColumnT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IFontT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IFormatT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IFormControlT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\IRichStringT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\libxl.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\ISheetT.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libXL\include\setup.h">
+      <Filter>LibXL\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base Classes">
@@ -237,5 +276,24 @@
     <Filter Include="PowerUps">
       <UniqueIdentifier>{49e3841f-5e8f-4a70-8a07-034bd1b918c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LibXL">
+      <UniqueIdentifier>{43697c93-60bf-4dda-99d0-8a222ca40388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LibXL\include">
+      <UniqueIdentifier>{c91f51d7-29ad-46c6-91c6-b6211b9e9b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LibXL\lib">
+      <UniqueIdentifier>{95374a7e-60be-4e01-8791-33f465b4c992}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libXL\lib\libxl.dll">
+      <Filter>LibXL\lib</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libXL\lib\libxl.lib">
+      <Filter>LibXL\lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>

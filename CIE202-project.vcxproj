@@ -71,7 +71,7 @@
       <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalIncludeDirectories>C:\Users\20106\source\repos\Phase_1_incomplete\libXL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>LibXL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -84,7 +84,7 @@
       <ProgramDatabaseFile>.\Release/graphics_prj.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>C:\Users\20106\source\repos\Phase_1_incomplete\libXL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>LibXL\lib</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -110,7 +110,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>C:\Users\Memo\source\repos\a0mfares\Phase_1_incomplete\libXL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>LibXL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -124,7 +124,7 @@
       <ProgramDatabaseFile>.\Debug/$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>C:\Users\Memo\source\repos\a0mfares\Phase_1_incomplete\libXL\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>LibXL\lib</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -209,10 +209,29 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="libXL\include\enum.h" />
+    <ClInclude Include="libXL\include\IAutoFilterT.h" />
+    <ClInclude Include="libXL\include\IBookT.h" />
+    <ClInclude Include="libXL\include\IConditionalFormatT.h" />
+    <ClInclude Include="libXL\include\IConditionalFormattingT.h" />
+    <ClInclude Include="libXL\include\IFilterColumnT.h" />
+    <ClInclude Include="libXL\include\IFontT.h" />
+    <ClInclude Include="libXL\include\IFormatT.h" />
+    <ClInclude Include="libXL\include\IFormControlT.h" />
+    <ClInclude Include="libXL\include\IRichStringT.h" />
+    <ClInclude Include="libXL\include\ISheetT.h" />
+    <ClInclude Include="libXL\include\libxl.h" />
+    <ClInclude Include="libXL\include\setup.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PowerDowns.h" />
     <ClInclude Include="PowerUps.h" />
     <ClInclude Include="toolbar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libXL\lib\libxl.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libXL\lib\libxl.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
