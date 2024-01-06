@@ -3,6 +3,8 @@
 #include "grid.h"
 #include "gameConfig.h"
 #include <iostream>
+#include <libxl.h>
+using namespace libxl;
 using namespace std;
 
 ////////////////////////////////////////////////////  class toolbarIcon   ////////////////////////////////////////////////////
@@ -61,11 +63,32 @@ void iconDel::onClick()
 iconSave::iconSave(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
 {
+
 }
 
 void iconSave::onClick()
 {
-
+	Book* book =  xlCreateBook();
+	auto grid = pGame->getGrid();
+	auto matrix = grid->getbrickmatrix();
+	int rows = height / config.brickHeight;
+	int cols = width / config.brickWidth;
+	for (int i = 0; i < rows; i++){
+		for (int j = 0; j < cols; j++){
+			if (matrix[i][j] != nullptr){
+					Sheet* sheet = book->addSheet("Sheet1");
+					if (sheet)
+					{
+						sheet->writeStr(i, j, "Hello, World !");
+						sheet->writeNum(i, j, 1000);
+					}
+					book->save("example.xls");
+					book->release();
+				
+			}
+		}
+	}
+	pGame->printMessage("Saved");
 }
 iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
