@@ -157,6 +157,8 @@ point grid::collisionAction()
 					{
 						point newpoint;
 						newpoint = brickMatrix[i][j]->getpoint();
+						newpoint.x += config.brickWidth / 2;
+						newpoint.y += config.brickHeight / 2;
 						
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2) {
