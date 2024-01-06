@@ -13,6 +13,8 @@ class grid:public drawable
 	brick*** brickMatrix;		//2D array of brick pointers
 
 	int rows, cols;
+	int random = rand() % 4;
+	collectable** colected;
 	
 	
 public:
@@ -25,6 +27,7 @@ public:
 	brick*** getbrickmatrix();
 	point collisionAction();
 	void deleteBrickOncollison(point index);
+	collectable** getcollected();
 	
 
 };

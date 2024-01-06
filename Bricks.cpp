@@ -8,6 +8,11 @@ brick::brick(point r_uprleft, int r_width, int r_height, game* r_pGame):
 {
 }
 
+point brick::getpoint()
+{
+	return uprLft;
+}
+
 ////////////////////////////////////////////////////  class normalBrick  /////////////////////////////////
 normalBrick::normalBrick(point r_uprleft, int r_width, int r_height, game* r_pGame):
 	brick(r_uprleft, r_width, r_height, r_pGame)
@@ -37,6 +42,11 @@ normalBrick::Rect normalBrick::getBoundingBox() const
 	boundingBox.lowerRight.x = uprLft.x + config.brickWidth;
 	boundingBox.lowerRight.y = uprLft.y + config.brickHeight;
 	return boundingBox;
+}
+
+point normalBrick::getpoint()
+{
+	return uprLft;
 }
 
 ////////////////////////////////////////////////////  class hardBrick  /////////////////////////////////
@@ -76,6 +86,11 @@ hardBrick::Rect hardBrick::getBoundingBox() const
 	return boundingBox;
 }
 
+point hardBrick::getpoint()
+{
+	return uprLft;
+}
+
 
 ////////////////////////////////////////////////////  class Rock  /////////////////////////////////
 Rock::Rock(point r_uprleft, int r_width, int r_height, game* r_pGame) :
@@ -107,4 +122,9 @@ Rock::Rect Rock::getBoundingBox() const
 	boundingBox.lowerRight.x = uprLft.x + config.brickWidth;
 	boundingBox.lowerRight.y = uprLft.y + config.brickHeight;
 	return boundingBox;
+}
+
+point Rock::getpoint()
+{
+	return uprLft;
 }

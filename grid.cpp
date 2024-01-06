@@ -2,6 +2,8 @@
 #include "game.h"
 #include "gameConfig.h"
 #include "PowerUps.h"
+#include "PowerDowns.h"
+
 
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG):
@@ -18,6 +20,21 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < cols; j++)
 			brickMatrix[i][j] = nullptr;
+
+	point Ballleft;
+	Ballleft.x = 60;
+	Ballleft.y = 60;
+
+	colected = new collectable * [8];
+	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+
 }
 
 grid::~grid()
@@ -31,7 +48,7 @@ grid::~grid()
 		delete brickMatrix[i];
 
 	delete brickMatrix;
-
+	delete colected;
 }
 
 void grid::draw() const
@@ -136,8 +153,23 @@ point grid::collisionAction()
 					/*point index;*/
 					index.x = i;
 					index.y = j;
-					if (brickMatrix[i][j]->stren<=0)
-					this->deleteBrickOncollison(index);
+					if (brickMatrix[i][j]->stren <= 0)
+					{
+						point newpoint;
+						newpoint = brickMatrix[i][j]->getpoint();
+						colected[0]->setpoint(newpoint);
+						this->deleteBrickOncollison(index);
+						if (config.breaked == 2) {
+
+							colected[0]->draw();
+							config.getcollected = true;
+							config.breaked = 0;
+							random = rand() % 3;
+							pGame->getWind()->UpdateBuffer();
+							
+						}
+
+					}
 					
 			
 				}
@@ -156,10 +188,12 @@ void grid::deleteBrickOncollison(point index)
 	point newBrickUpleft;
 	newBrickUpleft.x = uprLft.x + gridCellRowIndex * config.brickWidth;
 	newBrickUpleft.y = uprLft.y + gridCellColIndex * config.brickHeight;
+	
 
 	if (brickMatrix[gridCellRowIndex][gridCellColIndex] != nullptr) {
 		delete brickMatrix[gridCellRowIndex][gridCellColIndex];
 		brickMatrix[gridCellRowIndex][gridCellColIndex] = nullptr;
+		config.breaked++;
 		
 		pGame->getWind()->SetPen(LAVENDER, 1);
 		pGame->getWind()->SetBrush(LAVENDER);
@@ -168,6 +202,11 @@ void grid::deleteBrickOncollison(point index)
 	
 	
 
+}
+
+collectable** grid::getcollected()
+{
+	return colected;
 }
 
 

@@ -7,6 +7,7 @@ using namespace std;
 #include <chrono>
 #include <iomanip>
 #include "PowerUps.h"
+#include "PowerDowns.h"
 
 
 game::game()
@@ -68,6 +69,20 @@ game::game()
 	}
 	
 	padlespot->draw();
+	/*point Ballleft;
+	Ballleft.x = 60;
+	Ballleft.y = 60;
+
+	colected = new collectable * [8];
+	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, this);
+	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, this);
+	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, this);
+	colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, this);
+	colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, this);
+	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, this);
+	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, this);
+	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, this);*/
+
 
 
 	/*if (gameMode == MODE_PLAY)*
@@ -112,6 +127,7 @@ game::~game()
 	delete bricksGrid;
 	delete padlespot;
 	delete ballspot;
+	
 	
 }
 
@@ -311,6 +327,11 @@ void game::statusbardraw()
 	pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
 }
 
+//collectable** game::getcollectable() const
+//{
+//	return colected;
+//}
+
 
 
 
@@ -392,10 +413,18 @@ void game::go()
 					this->statusbardraw();
 				
 					padlespot->padlemove();
+					if (config.getcollected) {
+						bricksGrid->getcollected()[0]->move();
+						bricksGrid->getcollected()[0]->draw();
+						pWind->UpdateBuffer();
+					}
 					bricksGrid->collisionAction();
 					
 					
+					
+				
 
+					
 
 
 					

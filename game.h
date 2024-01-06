@@ -10,6 +10,7 @@
 
 
 
+
 //Main class that coordinates the game operation
 class game
 {
@@ -24,6 +25,7 @@ class game
 	grid* bricksGrid;
 	Paddle* padlespot;
 	Ball* ballspot;
+	//collectable** colected;
 	
 
 
@@ -81,6 +83,7 @@ public:
 	void updatelive();
 	string updateTIme();
 	void statusbardraw();
+	/*collectable** getcollectable() const;*/
 
 
 

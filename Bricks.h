@@ -21,6 +21,7 @@ class brick :public collidable
 public:
 	brick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	int stren;
+	virtual point getpoint();
 
 };
 
@@ -33,7 +34,7 @@ public:
 	normalBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
 	Rect getBoundingBox() const;
-
+	point getpoint() override;
 	
 };
 
@@ -46,6 +47,7 @@ public:
 	hardBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
 	Rect getBoundingBox() const;
+	point getpoint() override;
 };
 
 ////////////////////////////////////////////////////  class Rock  /////////////////////////////////
@@ -57,6 +59,7 @@ public:
 	Rock(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	void collisionAction();
 	Rect getBoundingBox() const;
+	point getpoint() override;
 };
 
 

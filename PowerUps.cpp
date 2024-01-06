@@ -7,7 +7,7 @@ PowerUps::PowerUps(point r_uprleft, int r_width, int r_height, game* r_pGame) : 
 
 FireBall::FireBall(point r_uprleft, int r_width, int r_height, game* r_pGame) : PowerUps(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerUps\\FireBall.jpg";
+	/*imageName = "images\\PowerUps\\FireBall.jpg";*/
 }
 
 void FireBall:: collisionAction() 

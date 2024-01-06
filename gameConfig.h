@@ -49,6 +49,8 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	bool widen = false;
 	bool reversed = false;
 	bool shrink = false;
+	bool getcollected = false;
+	bool getcollectedtimer = false;
 
 	
 	
