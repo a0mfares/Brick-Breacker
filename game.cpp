@@ -5,9 +5,11 @@ using namespace std;
 #include "CMUgraphicsLib\auxil.h"
 #include <thread>  
 #include <chrono>
-#include <iomanip>
+
+#include <sstream>
 #include "PowerUps.h"
 #include "PowerDowns.h"
+using namespace std::chrono;
 
 
 game::game()
@@ -297,22 +299,30 @@ void game::updatelive()
 	}
 }
 
-string game::updateTIme()
+void game::updateTIme()
 {
-	string timeStamp = "";
-	string minutes[11] = { "10","09","08","07","06","05","04","03","02","01","00" };
-	string seconds[60] = {
-		"59","58","57","56","55","54","53","52","51","50",
-		"49","48","47","46","45","44","43","42","41","40",
-		"39","38","37","36","35","34","33","32","31","30",
-		"29","28","27","26","25","24","23","22","21","20",
-		"19","18","17","16","15","14","13","12","11","10",
-		"09","08","07","06","05","04","03","02","01","00",
-	};
+	minutes duration(10);
+	auto endTime = std::chrono::steady_clock::now() + duration;
+	
+	
+	/*while(std::chrono::steady_clock::now() < endTime){*/
+		auto remainingTime = std::chrono::duration_cast<std::chrono::seconds>(endTime - std::chrono::steady_clock::now());
+		auto Minutes = std::chrono::duration_cast<minutes>(remainingTime);
+		auto Seconds = remainingTime % minutes(1);
+		string m = to_string(Minutes.count());
+		string s = to_string(Seconds.count());
+		
+		pWind->SetPen(BLACK, 1);
+		pWind->SetBrush(BLACK);
+		pWind->DrawString(10, config.windHeight - config.statusBarHeight, m + ":" + s);
+		
+		
+	/*}*/
+	
 
 
 
-	return timeStamp;
+
 }
 
 void game::statusbardraw()
@@ -325,6 +335,8 @@ void game::statusbardraw()
 	//pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
 	pWind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
 	pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
+	updateTIme();
+
 }
 
 //collectable** game::getcollectable() const
@@ -361,7 +373,6 @@ void game::go()
 		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
-			
 			//[1] If user clicks on the Toolbar
 			if (y >= 0 && y < config.toolBarHeight)
 			{
@@ -415,7 +426,7 @@ void game::go()
 					padlespot->padlemove();
 					if (config.getcollected) {
 						bricksGrid->getcollected()[0]->move();
-						bricksGrid->getcollected()[0]->draw();
+						/*bricksGrid->getcollected()[0]->draw();*/
 						pWind->UpdateBuffer();
 					}
 					bricksGrid->collisionAction();

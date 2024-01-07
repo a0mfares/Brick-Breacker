@@ -20,6 +20,7 @@ void collectable::move()
     uprLft.y++;
     uprLft.y++;
     uprLft.y++;
+    this->draw();
 }
 
 void collectable::draw()
