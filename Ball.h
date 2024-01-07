@@ -34,6 +34,7 @@ public:
 	void checkforboundies(collidable* o);
 	void updatepos();
 	void drawgameelements();
+	void moveball1();
 
 	
 	

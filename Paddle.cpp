@@ -34,7 +34,7 @@ void Paddle::padlemove()
     pGame->getWind()->SetPen(LAVENDER, 1);
     pGame->getWind()->SetBrush(LAVENDER);
     if (config.speedUp) {
-        movementSpeed = 30;
+        movementSpeed = 25;
     }
     else if(config.speedDown){
         movementSpeed = 10;

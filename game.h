@@ -25,6 +25,10 @@ class game
 	grid* bricksGrid;
 	Paddle* padlespot;
 	Ball* ballspot;
+	Ball* b1;
+	Ball* b2;
+	Ball* b3;
+
 	//collectable** colected;
 	
 
@@ -86,6 +90,9 @@ public:
 	/*collectable** getcollectable() const;*/
 	void collectedtimer();
 	void timer(bool &x);
+	Ball* getball1() const;
+	Ball* getball2() const;
+	Ball* getball3() const;
 
 
 

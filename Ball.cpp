@@ -163,6 +163,21 @@ void Ball::drawgameelements()
     pGame->getpadle()->draw();
 }
 
+void Ball::moveball1()
+{
+    pGame->getWind()->SetBuffering(true);
+    pGame->getWind()->FlushKeyQueue();
+    // Check for paddle-ball collision
+    this->checkforboundies(pGame->getpadle());
+    this->reflectball();
+    // Draw the game elements
+  
+    // Update ball position
+    this->updatepos();
+    //draw ball
+    this->draw();
+}
+
 
 
 

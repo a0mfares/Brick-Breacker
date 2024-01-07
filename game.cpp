@@ -42,6 +42,21 @@ game::game()
 	BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
 	ballspot = new Ball(BallUpperleft, config.BallRad, config.BallRad, this);
 	ballspot->draw();
+
+
+	point bb1;
+	bb1.x = config.windWidth / 2;
+	bb1.y = config.paddleAreaHeight - config.BallRad;
+	point bb2;
+	bb2.x = (config.windWidth / 2) + 20;
+	bb2.y = config.paddleAreaHeight - config.BallRad;
+	point bb3;
+	bb3.x = (config.windWidth / 2) - 20;
+	bb3.y = config.paddleAreaHeight - config.BallRad;
+	b1 = new Ball(bb1, config.BallRad, config.BallRad, this);
+	b2 = new Ball(bb2, config.BallRad, config.BallRad, this);
+	b3 = new Ball(bb3, config.BallRad, config.BallRad, this);
+
 	
 
 
@@ -116,6 +131,10 @@ game::~game()
 	delete bricksGrid;
 	delete padlespot;
 	delete ballspot;
+	delete b1;
+	delete b2;
+	delete b3;
+
 	
 	
 }
@@ -366,6 +385,21 @@ void game::timer(bool &x)
 	
 }
 
+Ball* game::getball1() const
+{
+	return b1;
+}
+
+Ball* game::getball2() const
+{
+	return b2;
+}
+
+Ball* game::getball3() const
+{
+	return b3;
+}
+
 //collectable** game::getcollectable() const
 //{
 //	return colected;
@@ -447,6 +481,25 @@ void game::go()
 						gameToolbar->handleClick(x, y);
 
 					}
+					if (config.magnet) {
+						char c;
+						keytype k;
+						k = this->getWind()->GetKeyPress(c);
+
+						if (k == ASCII && c == ' ') {
+							ballspot->resetxyinc();
+							config.magnet = false;
+
+						}
+					}
+					else if (config.multibleballs) {
+						b1->draw();
+						b1->moveball1();
+						pWind->UpdateBuffer();
+						/*b2->moveball();
+						b3->moveball();*/
+					}
+
 
 					ballspot->moveball();
 					this->updatelive();
@@ -458,6 +511,8 @@ void game::go()
 					this->timer(config.speedDown);
 					this->timer(config.reversed);
 					this->timer(config.fired);
+					this->timer(config.magnet);
+					this->timer(config.multibleballs);
 					padlespot->setWidth();
 					
 					padlespot->padlemove();

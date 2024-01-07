@@ -93,10 +93,19 @@ void Magnet::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
+		config.magnet = true;
 		auto ball = pGame->getball();
 		ball->deleteball();
 		ball->setxyinczero();
+		point r;
+		r.x = (paddle->getBoundingBox().upperLeft.x + paddle->getBoundingBox().lowerRight.x) / 2;
+		r.y = paddle->getBoundingBox().upperLeft.y;
+		ball->setpoint(r);
 		ball->draw();
+		/*ball->resetxyinc();*/
+		
+		
+		pGame->getWind()->UpdateBuffer();
 	}
 }
 
@@ -119,17 +128,9 @@ void MultipleBalls::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-		auto ball = pGame->getball();
-		ball->draw();
-		point BallUpperleft;
-		BallUpperleft.x = config.windWidth / 2 - 50;
-		BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
-		ball->setpoint(BallUpperleft);
-		ball->draw();
-		BallUpperleft.x = config.windWidth / 2 + 50;
-		BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
-		ball->setpoint(BallUpperleft);
-		ball->draw();
+		config.multibleballs = true;
+		
+		
 	}
 }
 
