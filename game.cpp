@@ -354,7 +354,7 @@ void game::collectedtimer()
 	}
 }
 
-void game::timer(bool x)
+void game::timer(bool &x)
 {
 	if(x == true){
 		config.timer += 0.1;
