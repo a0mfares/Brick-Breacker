@@ -34,6 +34,7 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	
 
 }
 
@@ -161,13 +162,18 @@ point grid::collisionAction()
 						newpoint.y += config.brickHeight / 2;
 						
 						this->deleteBrickOncollison(index);
-						if (config.breaked == 2) {
-							colected[0]->setpoint(newpoint);
-							colected[0]->draw();
+						if (config.breaked == 2 && config.getcollectedtimer) {
+
+							config.collecteditems = rand() % 8;
+							cout << config.collecteditems;
+							colected[config.collecteditems]->setpoint(newpoint);
+							colected[config.collecteditems]->draw();
 							config.getcollected = true;
+							config.getcollectedtimer = false;
 							config.breaked = 0;
 							random = rand() % 3;
 							pGame->getWind()->UpdateBuffer();
+
 							
 						}
 

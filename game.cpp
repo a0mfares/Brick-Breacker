@@ -357,6 +357,13 @@ void game::statusbardraw()
 
 }
 
+void game::collectedtimer()
+{
+	if (config.j <= 29) {
+		config.getcollectedtimer = true;
+	}
+}
+
 //collectable** game::getcollectable() const
 //{
 //	return colected;
@@ -425,7 +432,7 @@ void game::go()
 				do
 				{
 					
-					config.j += 0.2;
+					config.j += 0.1;
 					pWind->GetMouseClick(x, y);
 					kType = pWind->GetKeyPress(cKeyData);
 
@@ -441,10 +448,12 @@ void game::go()
 					ballspot->moveball();
 					this->updatelive();
 					this->statusbardraw();
+					this->collectedtimer();
 				
 					padlespot->padlemove();
 					if (config.getcollected) {
-						bricksGrid->getcollected()[0]->move();
+						bricksGrid->getcollected()[config.collecteditems]->move();
+						bricksGrid->getcollected()[config.collecteditems]->collisionAction();
 						/*bricksGrid->getcollected()[0]->draw();*/
 						pWind->UpdateBuffer();
 					}

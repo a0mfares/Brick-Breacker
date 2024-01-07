@@ -8,7 +8,7 @@ PowerDowns::PowerDowns(point r_uprleft, int r_width, int r_height, game* r_pGame
 
 ReverseDirection::ReverseDirection(point r_uprleft, int r_width, int r_height, game* r_pGame): PowerDowns(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerDowns\\Reverse.jpg";
+	/*imageName = "images\\PowerDowns\\Reverse.jpg";*/
 }
 
 void ReverseDirection::collisionAction()
@@ -32,7 +32,7 @@ ReverseDirection::Rect ReverseDirection::getBoundingBox() const
 
 QuickSand::QuickSand(point r_uprleft, int r_width, int r_height, game* r_pGame) : PowerDowns(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerDowns\\QuickSand.jpg";
+	//imageName = "images\\PowerDowns\\QuickSand.jpg";
 }
 
 void QuickSand::collisionAction()
@@ -56,7 +56,7 @@ QuickSand::Rect QuickSand::getBoundingBox() const
 
 ShrinkPaddle::ShrinkPaddle(point r_uprleft, int r_width, int r_height, game* r_pGame) : PowerDowns(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerDowns\\Shrink.jpg";
+	/*imageName = "images\\PowerDowns\\Shrink.jpg";*/
 }
 
 void ShrinkPaddle::collisionAction()

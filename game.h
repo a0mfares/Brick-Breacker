@@ -84,6 +84,7 @@ public:
 	void updateTime(double i , double j);
 	void statusbardraw();
 	/*collectable** getcollectable() const;*/
+	void collectedtimer();
 
 
 

@@ -35,7 +35,7 @@ FireBall::Rect FireBall::getBoundingBox() const
 
 WindGlide::WindGlide(point r_uprleft, int r_width, int r_height, game* r_pGame) : PowerUps(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerUps\\WindGlide.jpg";
+	/*imageName = "images\\PowerUps\\WindGlide.jpg";*/
 }
 
 void WindGlide::collisionAction()
@@ -59,7 +59,7 @@ WindGlide::Rect WindGlide::getBoundingBox() const
 
 WidePaddle::WidePaddle(point r_uprleft, int r_width, int r_height, game* r_pGame) : PowerUps(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerUps\\WidePaddle.jpeg";
+	/*imageName = "images\\PowerUps\\WidePaddle.jpeg";*/
 }
 
 void WidePaddle::collisionAction()
@@ -83,7 +83,7 @@ WidePaddle::Rect WidePaddle::getBoundingBox() const
 
 Magnet::Magnet(point r_uprleft, int r_width, int r_height, game* r_pGame) : PowerUps(r_uprleft, r_width, r_height, r_pGame)
 {
-	imageName = "images\\PowerUps\\Magnet.jpeg";
+	/*imageName = "images\\PowerUps\\Magnet.jpeg";*/
 }
 
 void Magnet::collisionAction()
