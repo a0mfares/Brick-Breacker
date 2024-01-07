@@ -65,6 +65,8 @@ void ShrinkPaddle::collisionAction()
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
 		config.shrink = true;
+		paddle->setWidth();
+
 	}
 }
 

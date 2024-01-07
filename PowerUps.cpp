@@ -64,10 +64,12 @@ WidePaddle::WidePaddle(point r_uprleft, int r_width, int r_height, game* r_pGame
 
 void WidePaddle::collisionAction()
 {
+
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
 		config.widen = true;
+		paddle->setWidth();
 	}
 }
 

@@ -53,8 +53,8 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	bool getcollectedtimer = false;
 	
 	double i = 1; double j = 0;
-	int collecteditems = 0;
-	
+	int collecteditems = 2;
+	double timer = 0;
 	
 
 

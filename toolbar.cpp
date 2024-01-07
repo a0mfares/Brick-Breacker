@@ -74,9 +74,10 @@ void iconSave::onClick()
 	int rows = height / config.brickHeight;
 	int cols = width / config.brickWidth;
 	if(book){
+		Sheet* sheet = book->addSheet("Sheet1");
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				Sheet* sheet = book->addSheet("Sheet1");
+				
 				if (sheet)
 				{
 					if (matrix[i][j] != nullptr) {
@@ -89,7 +90,7 @@ void iconSave::onClick()
 				}
 
 			}
-		}
+		}	
 		book->save("example.xls");
 		book->release();
 	}

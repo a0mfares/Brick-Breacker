@@ -13,7 +13,7 @@ public:
 	void setpoint(point p);
 	void padlemove();
 	Rect getBoundingBox() const override;
-	
+	void setWidth();
 	
 
 };

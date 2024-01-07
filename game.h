@@ -85,6 +85,7 @@ public:
 	void statusbardraw();
 	/*collectable** getcollectable() const;*/
 	void collectedtimer();
+	void timer(bool x);
 
 
 

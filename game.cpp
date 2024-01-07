@@ -56,17 +56,7 @@ game::game()
 	point PadleUpperleft;
 	PadleUpperleft.x = (config.windWidth / 2) - (config.padlewidth / 2);
 	PadleUpperleft.y = config.paddleAreaHeight;
-	
-	if (config.widen) {
-		padlespot = new Paddle(PadleUpperleft, config.widenWidth, config.padleheight, this);
-	}
-	else if(config.shrink) {
-		padlespot = new Paddle(PadleUpperleft, config.shrinkenWidth, config.padleheight, this);
-	}
-	else {
-		padlespot = new Paddle(PadleUpperleft, config.padlewidth, config.padleheight, this);
-	}
-	
+	padlespot = new Paddle(PadleUpperleft, config.padlewidth, config.padleheight, this);
 	padlespot->draw();
 	/*point Ballleft;
 	Ballleft.x = 60;
@@ -364,6 +354,18 @@ void game::collectedtimer()
 	}
 }
 
+void game::timer(bool x)
+{
+	if(x == true){
+		config.timer += 0.1;
+		if (config.timer >= 30) {
+			x = false;
+			config.timer = 0;
+		}
+	}
+	
+}
+
 //collectable** game::getcollectable() const
 //{
 //	return colected;
@@ -432,6 +434,7 @@ void game::go()
 				do
 				{
 					
+					
 					config.j += 0.1;
 					pWind->GetMouseClick(x, y);
 					kType = pWind->GetKeyPress(cKeyData);
@@ -449,7 +452,14 @@ void game::go()
 					this->updatelive();
 					this->statusbardraw();
 					this->collectedtimer();
-				
+					this->timer(config.widen);
+					this->timer(config.shrink);
+					this->timer(config.speedUp);
+					this->timer(config.speedDown);
+					this->timer(config.reversed);
+					this->timer(config.fired);
+					padlespot->setWidth();
+					
 					padlespot->padlemove();
 					if (config.getcollected) {
 						bricksGrid->getcollected()[config.collecteditems]->move();

@@ -107,3 +107,19 @@ Paddle::Rect Paddle::getBoundingBox() const
     return boundingBox;
 }
 
+void Paddle::setWidth() 
+{
+    if (config.widen) {
+        width = config.widenWidth;
+        config.padlewidth = config.widenWidth;
+    }
+    else if (config.shrink) {
+        width = config.shrinkenWidth;
+        config.padlewidth = config.shrinkenWidth;
+    }
+    else {
+        width = config.padlewidth;
+        config.padlewidth = 150;
+    }
+}
+
