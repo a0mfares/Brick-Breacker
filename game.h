@@ -81,7 +81,7 @@ public:
 	void setpause(bool p);
 	void setgameover(bool g);
 	void updatelive();
-	void updateTIme();
+	void updateTime(double i , double j);
 	void statusbardraw();
 	/*collectable** getcollectable() const;*/
 

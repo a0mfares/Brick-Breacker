@@ -73,20 +73,25 @@ void iconSave::onClick()
 	auto matrix = grid->getbrickmatrix();
 	int rows = height / config.brickHeight;
 	int cols = width / config.brickWidth;
-	for (int i = 0; i < rows; i++){
-		for (int j = 0; j < cols; j++){
-			if (matrix[i][j] != nullptr){
-					Sheet* sheet = book->addSheet("Sheet1");
-					if (sheet)
-					{
-						sheet->writeStr(i, j, "Hello, World !");
-						sheet->writeNum(i, j, 1000);
+	if(book){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				Sheet* sheet = book->addSheet("Sheet1");
+				if (sheet)
+				{
+					if (matrix[i][j] != nullptr) {
+					
+						sheet->writeStr(2, 1, "Hello, World !");
+						sheet->writeNum(2, 1, 1000);
 					}
-					book->save("example.xls");
-					book->release();
-				
+
+
+				}
+
 			}
 		}
+		book->save("example.xls");
+		book->release();
 	}
 	pGame->printMessage("Saved");
 }
