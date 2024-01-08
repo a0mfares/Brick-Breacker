@@ -276,3 +276,13 @@ bool toolbar::handleClick(int x, int y)
 }
 
 
+
+iconRestart::iconRestart(point r_uprleft, int r_width, int r_height, game* r_pGame) : toolbarIcon(r_uprleft,r_width,r_height,r_pGame)
+{
+	imageName = "images\\ToolbarIcons\\restart.jpg";
+}
+
+void iconRestart::onClick()
+{
+	pGame->setRestrart(true);
+}

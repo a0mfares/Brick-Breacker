@@ -69,6 +69,12 @@ public:
 	iconPause(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	virtual void onClick();
 };
+class iconRestart : public toolbarIcon
+{
+public:
+	iconRestart(point r_uprleft, int r_width, int r_height, game* r_pGame);
+	virtual void onClick();
+};
 
 
 
@@ -110,5 +116,6 @@ public:
 	~toolbar();
 	void draw() const;
 	bool handleClick(int x, int y);	//handles clicks on toolbar icons, returns true if exit is clicked
+	
 };
 

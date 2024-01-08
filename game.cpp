@@ -134,7 +134,7 @@ game::~game()
 	delete b1;
 	delete b2;
 	delete b3;
-
+	delete iconres;
 	
 	
 }
@@ -366,6 +366,11 @@ void game::statusbardraw()
 
 }
 
+void game::setRestrart(bool x)
+{
+	restart = x;
+}
+
 void game::collectedtimer()
 {
 	if (config.j <= 29) {
@@ -398,6 +403,11 @@ Ball* game::getball2() const
 Ball* game::getball3() const
 {
 	return b3;
+}
+
+void game::setMagnet(bool x)
+{
+	magnet = x;
 }
 
 //collectable** game::getcollectable() const
@@ -442,19 +452,48 @@ void game::go()
 			}
 			
 			if (gameover) {
-
-				pWind->SetPen(LAVENDER, 1);
-				pWind->SetBrush(LAVENDER);
-				pWind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-				gameToolbar->draw();
-				bricksGrid->draw();
+				pWind->GetMouseClick(x, y);
+				pWind->SetPen(DARKGRAY);
+				pWind->SetBrush(DARKGRAY);
+				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				pWind->SetPen(DARKRED);
+				pWind->SetBrush(DARKRED);
+				pWind->SetFont(100,1,ROMAN,"Times new Roman");
+				pWind->DrawString(config.windWidth/2 -300 ,config.windHeight - 500, "GAME OVER");
+				pWind->SetPen(BLACK);
+				pWind->SetBrush(BLACK);
+				pWind->SetFont(80, 1, ROMAN, "Times new Roman");
+				if (config.Score == 0) {
+					pWind->DrawString(config.windWidth / 2 - 150, config.windHeight / 2 + 200, "SCORE : 0" );
+				}
+				else {
+					pWind->DrawString(config.windWidth / 2 - 150, config.windHeight / 2 + 200, "SCORE : " + config.Score);
+				}
 				
-				ballspot->draw();
-				padlespot->draw();
+				/*point resup;
+				resup.x =500;
+				resup.y = 350;
+				iconres = new iconRestart(resup, config.iconWidth, config.toolBarHeight, this);
+				iconres->draw();
+				if (y >= 350 && y < 300)
+				{
+
+					iconres->onClick();
+				}*/
+				
+				
+
+				/*iconres->onClick();*/
 				pWind->UpdateBuffer();
 
 
 			}
+			/*if (restart) {
+				pWind->SetPen(LAVENDER);
+				pWind->SetBrush(LAVENDER);
+				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				ballspot->drawgameelements();
+			}*/
 		}
 		
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
@@ -481,23 +520,23 @@ void game::go()
 						gameToolbar->handleClick(x, y);
 
 					}
-					if (config.magnet) {
+					if (magnet) {
 						char c;
 						keytype k;
 						k = this->getWind()->GetKeyPress(c);
 
 						if (k == ASCII && c == ' ') {
-							ballspot->resetxyinc();
-							config.magnet = false;
-
+							
+							setMagnet(false);
+							
 						}
 					}
 					else if (config.multibleballs) {
 						b1->draw();
 						b1->moveball1();
+						
+
 						pWind->UpdateBuffer();
-						/*b2->moveball();
-						b3->moveball();*/
 					}
 
 

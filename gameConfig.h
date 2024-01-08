@@ -55,8 +55,9 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 	bool magnet = false;
 	
 	double i = 1; double j = 0;
-	int collecteditems = 0;
+	int collecteditems = 3;
 	double timer = 0;
+	
 	
 
 

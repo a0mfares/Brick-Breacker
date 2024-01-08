@@ -164,9 +164,9 @@ point grid::collisionAction()
 						newpoint.y += config.brickHeight / 2;
 						
 						this->deleteBrickOncollison(index);
-						if (config.breaked == 2 && config.getcollectedtimer) {
+						if (config.breaked == 1 && config.getcollectedtimer) {
 
-							config.collecteditems = rand() % 8;
+							/*config.collecteditems = rand() % 8;*/
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
 							colected[config.collecteditems]->draw();
@@ -253,7 +253,8 @@ void grid::save()
 void grid::load()
 {
 	Book* book = xlCreateBook();
-
+	int values[3] = { 0,0,0 };
+	int count = 0;
 	if (book->load("example.xls"))
 	{
 		Sheet* sheet = book->getSheet(0);
@@ -264,11 +265,23 @@ void grid::load()
 				for (int col = sheet->firstCol(); col < sheet->lastCol(); ++col)
 				{
 					CellType cellType = sheet->cellType(row, col);
+					int d = sheet->readNum(row, col);
+					values[count++] = d;
 					
 					
-					std::wcout << std::endl;
 				}
+				cout << endl;
+				for (int i = 0; i < 3; i++) {
+					cout << values[i] << "\t";
+
+
+				}
+				count = 0;
+
 			}
+			
+			
+			
 		}
 	}
 

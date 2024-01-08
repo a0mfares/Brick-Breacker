@@ -24,19 +24,21 @@ class game
 	toolbar* gameToolbar;
 	grid* bricksGrid;
 	Paddle* padlespot;
+	iconRestart* iconres;
 	Ball* ballspot;
 	Ball* b1;
 	Ball* b2;
 	Ball* b3;
 
 	//collectable** colected;
-	
+	bool magnet = false;
 
 
 	bool isplay =false;
 	bool isExit = false;
 	bool ispause = false;
 	bool gameover = false;
+	bool restart = false;
 	int COUNT = 0;
 	
 	
@@ -87,12 +89,14 @@ public:
 	void updatelive();
 	void updateTime(double i , double j);
 	void statusbardraw();
+	void setRestrart(bool x);
 	/*collectable** getcollectable() const;*/
 	void collectedtimer();
 	void timer(bool &x);
 	Ball* getball1() const;
 	Ball* getball2() const;
 	Ball* getball3() const;
+	void setMagnet(bool x);
 
 
 

@@ -26,7 +26,9 @@ void normalBrick::collisionAction()
 {
 	//TODO: Add collision action logic
 	auto brickball = isColliding(pGame->getball(),this);
-	if (brickball.collision) {
+	auto brickball1 = isColliding(pGame->getball1(), this);
+	
+	if (brickball.collision|| brickball1.collision) {
 		stren--;
 		config.Score++;
 	}
@@ -67,11 +69,13 @@ void hardBrick::collisionAction()
 {
 	//TODO: Add collision action logic
 	auto brickball = isColliding(pGame->getball(), this);
-	if (brickball.collision) {
+	auto brickball1 = isColliding(pGame->getball1(), this);
+	
+	if ((brickball.collision || brickball1.collision)) {
 		stren--;
 		config.Score++;
 	}
-	if (config.fired && brickball.collision) {
+	if (config.fired && (brickball.collision || brickball1.collision )) {
 		stren--;
 		stren--;
 		stren--;
@@ -112,10 +116,12 @@ Rock::Rock(point r_uprleft, int r_width, int r_height, game* r_pGame) :
 
 void Rock::collisionAction()
 {
-	auto brickball = isColliding(pGame->getball(), this);
 	
 	
-		if (brickball.collision && config.fired) {
+		auto brickball = isColliding(pGame->getball(), this);
+		auto brickball1 = isColliding(pGame->getball1(), this);
+		
+		if (brickball.collision || brickball1.collision ) {
 			stren--;
 			config.Score++;
 		}
