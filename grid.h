@@ -28,7 +28,8 @@ public:
 	point collisionAction();
 	void deleteBrickOncollison(point index);
 	collectable** getcollected();
-	
+	void save();
+	void load();
 
 };
 

@@ -22,6 +22,7 @@ public:
 	brick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 	int stren;
 	virtual point getpoint();
+	virtual BrickType getType() = 0;
 
 };
 
@@ -35,6 +36,7 @@ public:
 	void collisionAction();
 	Rect getBoundingBox() const;
 	point getpoint() override;
+	BrickType getType() override;
 	
 };
 
@@ -48,6 +50,7 @@ public:
 	void collisionAction();
 	Rect getBoundingBox() const;
 	point getpoint() override;
+	BrickType getType() override;
 };
 
 ////////////////////////////////////////////////////  class Rock  /////////////////////////////////
@@ -60,6 +63,7 @@ public:
 	void collisionAction();
 	Rect getBoundingBox() const;
 	point getpoint() override;
+	BrickType getType() override;
 };
 
 

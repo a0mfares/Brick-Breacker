@@ -377,7 +377,7 @@ void game::timer(bool &x)
 {
 	if(x == true){
 		config.timer += 0.1;
-		if (config.timer >= 30) {
+		if (config.timer >= 26) {
 			x = false;
 			config.timer = 0;
 		}

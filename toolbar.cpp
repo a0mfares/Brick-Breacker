@@ -3,8 +3,7 @@
 #include "grid.h"
 #include "gameConfig.h"
 #include <iostream>
-#include <libxl.h>
-using namespace libxl;
+
 using namespace std;
 
 ////////////////////////////////////////////////////  class toolbarIcon   ////////////////////////////////////////////////////
@@ -68,33 +67,7 @@ iconSave::iconSave(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 
 void iconSave::onClick()
 {
-	Book* book =  xlCreateBook();
-	auto grid = pGame->getGrid();
-	auto matrix = grid->getbrickmatrix();
-	int rows = height / config.brickHeight;
-	int cols = width / config.brickWidth;
-	if(book){
-		Sheet* sheet = book->addSheet("Sheet1");
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				
-				if (sheet)
-				{
-					if (matrix[i][j] != nullptr) {
-					
-						sheet->writeStr(2, 1, "Hello, World !");
-						sheet->writeNum(2, 1, 1000);
-					}
-
-
-				}
-
-			}
-		}	
-		book->save("example.xls");
-		book->release();
-	}
-	pGame->printMessage("Saved");
+	pGame->getGrid()->save();
 }
 iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 	toolbarIcon(r_lwrleft, r_width, r_height, r_pGame)
@@ -102,7 +75,7 @@ iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 
 void iconLoad::onClick() {
 	
-	
+	pGame->getGrid()->load();
 }
 
 
