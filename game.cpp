@@ -537,6 +537,7 @@ void game::go()
 						
 
 						pWind->UpdateBuffer();
+
 					}
 
 
