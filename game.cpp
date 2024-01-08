@@ -366,10 +366,10 @@ void game::statusbardraw()
 
 }
 
-void game::collectedtimer()
+void game::collectedtimer(bool &x)
 {
 	if (config.j <= 29) {
-		config.getcollectedtimer = true;
+		x = true;
 	}
 }
 
@@ -504,7 +504,7 @@ void game::go()
 					ballspot->moveball();
 					this->updatelive();
 					this->statusbardraw();
-					this->collectedtimer();
+					this->collectedtimer(config.getcollectedtimer);
 					this->timer(config.widen);
 					this->timer(config.shrink);
 					this->timer(config.speedUp);

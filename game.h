@@ -88,7 +88,7 @@ public:
 	void updateTime(double i , double j);
 	void statusbardraw();
 	/*collectable** getcollectable() const;*/
-	void collectedtimer();
+	void collectedtimer(bool &x);
 	void timer(bool &x);
 	Ball* getball1() const;
 	Ball* getball2() const;

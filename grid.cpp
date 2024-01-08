@@ -147,6 +147,7 @@ point grid::collisionAction()
 					// Handle brick-ball collision
 					brickMatrix[i][j]->collisionAction();
 					// Reflect the ball's direction
+					/*pGame->getball()->checkforboundies(brickMatrix[i][j]);*/
 
 					pGame->getball()->reflectball(brickMatrix[i][j]);
 						
@@ -164,7 +165,7 @@ point grid::collisionAction()
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2 && config.getcollectedtimer) {
 
-							//config.collecteditems = rand() % 8;
+							config.collecteditems = rand() % 8;
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
 							colected[config.collecteditems]->draw();
