@@ -27,15 +27,15 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	Ballleft.x = 60;
 	Ballleft.y = 60;
 
-	colected = new collectable * [8];
+	colected = new collectable * [6];
 	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	//colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
+	//colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[3] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[4] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[5] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
 	
 
 }
@@ -164,14 +164,18 @@ point grid::collisionAction()
 						newpoint.y += config.brickHeight / 2;
 						
 						this->deleteBrickOncollison(index);
-						if (config.breaked == 1 && config.getcollectedtimer) {
+						if (config.breaked == rand()% 5) {
 
-							/*config.collecteditems = rand() % 8;*/
+							config.collecteditems = rand() % 7;
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
-							colected[config.collecteditems]->draw();
+							if (pGame->getC()) {
+								colected[config.collecteditems]->draw();
+							}
+							
+							
 							config.getcollected = true;
-							config.getcollectedtimer = false;
+							
 							config.breaked = 0;
 							random = rand() % 3;
 							pGame->getWind()->UpdateBuffer();
@@ -270,7 +274,10 @@ void grid::load()
 					
 					
 				}
+				addBrickFromFile(values[0], values[1], values[2]);
+				
 				cout << endl;
+				this->draw();
 				for (int i = 0; i < 3; i++) {
 					cout << values[i] << "\t";
 
@@ -287,6 +294,29 @@ void grid::load()
 
 	book->release();
 	
+}
+
+int grid::addBrickFromFile(int row, int col, int typ)
+{
+	point newBrickUpleft;
+	newBrickUpleft.x = uprLft.x + col * config.brickWidth;
+	newBrickUpleft.y = uprLft.y + row * config.brickHeight;
+
+	switch (typ)
+	{
+	case 0:	//The new brick to add is Normal Brick
+		brickMatrix[row][col] = new normalBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+		break;
+	case 1:	//The new brick to add is Normal Brick
+		brickMatrix[row][col] = new hardBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+		break;
+	case 2:	//The new brick to add is Normal Brick
+		brickMatrix[row][col] = new Rock(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+		break;
+		//TODO: 
+		// handle more types
+	}
+	return 1;
 }
 
 
