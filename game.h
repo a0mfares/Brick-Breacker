@@ -91,7 +91,7 @@ public:
 	void statusbardraw();
 	void setRestrart(bool x);
 	/*collectable** getcollectable() const;*/
-	void collectedtimer();
+	void collectedtimer(bool &x);
 	void timer(bool &x);
 	Ball* getball1() const;
 	Ball* getball2() const;
