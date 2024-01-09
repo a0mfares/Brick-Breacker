@@ -437,7 +437,7 @@ void game::go()
 				gameToolbar->handleClick(x, y);
 			}
 
-			if (gameover == true) {
+			if (gameover) {
 				pWind->SetPen(BLACK, 1);
 				pWind->SetBrush(BLACK);
 				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
@@ -507,7 +507,7 @@ void game::go()
 					
 					bricksGrid->collisionAction();
 
-
+					bricksGrid->check();
 
 
 

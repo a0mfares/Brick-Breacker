@@ -33,5 +33,6 @@ public:
 	int addBrickFromFile(int row, int col, int typ);
 	int getrows();
 	int getcol();
+	void check();
 };
 

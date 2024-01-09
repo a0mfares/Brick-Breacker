@@ -326,6 +326,28 @@ int grid::getcol()
 	return cols;
 }
 
+void grid::check()
+{
+	auto pWind = pGame->getWind();
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			if (brickMatrix == nullptr) {
+				pWind->SetPen(BLACK, 1);
+				pWind->SetBrush(BLACK);
+				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				pWind->SetPen(DARKRED, 1);
+				pWind->SetBrush(DARKRED);
+				pWind->SetFont(50, 1, ROMAN, "Times New Roman");
+				pWind->DrawString(config.windWidth / 2 - 100, config.windHeight / 2 - 100, "GAME OVER");
+				pWind->SetPen(WHITE, 1);
+				pWind->SetBrush(WHITE);
+				pWind->DrawString(config.windWidth / 2 + 100, config.windHeight / 2 + 100, "Score : " + config.Score);
+				pWind->UpdateBuffer();
+			}
+		}
+	}
+}
+
 
 //void grid::randomPoint()
 //{
@@ -357,5 +379,3 @@ int grid::getcol()
 //	
 //
 //}
-
-
