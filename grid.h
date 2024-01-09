@@ -30,6 +30,7 @@ public:
 	collectable** getcollected();
 	void save();
 	void load();
+	int addBrickFromFile(int row, int col, int typ);
 
 };
 

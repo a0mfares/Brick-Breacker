@@ -12,6 +12,7 @@ public:
     virtual void move();
     virtual void draw();
     virtual void setpoint(point p);
+    virtual void deleteball();
 };
 
 

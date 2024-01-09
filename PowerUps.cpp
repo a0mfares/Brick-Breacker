@@ -129,7 +129,10 @@ void MultipleBalls::collisionAction()
 
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-		config.multibleballs = true;
+		pGame->getball1()->draw();
+		pGame->getball1()->moveball();
+		cout << "Running";
+
 		
 	}
 }

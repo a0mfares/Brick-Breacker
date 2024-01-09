@@ -28,7 +28,10 @@ void normalBrick::collisionAction()
 	auto brickball = isColliding(pGame->getball(),this);
 	auto brickball1 = isColliding(pGame->getball1(), this);
 	
-	if (brickball.collision|| brickball1.collision) {
+	if (brickball.collision) {
+		stren--;
+		config.Score++;
+	}else if(brickball1.collision){
 		stren--;
 		config.Score++;
 	}
@@ -71,11 +74,21 @@ void hardBrick::collisionAction()
 	auto brickball = isColliding(pGame->getball(), this);
 	auto brickball1 = isColliding(pGame->getball1(), this);
 	
-	if ((brickball.collision || brickball1.collision)) {
+	if (brickball.collision ) {
 		stren--;
 		config.Score++;
 	}
-	if (config.fired && (brickball.collision || brickball1.collision )) {
+	else if (brickball1.collision) {
+		stren--;
+		config.Score++;
+		cout << " the other ball";
+	}
+	if (config.fired && brickball.collision ) {
+		stren--;
+		stren--;
+		stren--;
+		config.Score++;
+	}else if(config.fired && brickball1.collision) {
 		stren--;
 		stren--;
 		stren--;
@@ -121,9 +134,14 @@ void Rock::collisionAction()
 		auto brickball = isColliding(pGame->getball(), this);
 		auto brickball1 = isColliding(pGame->getball1(), this);
 		
-		if (brickball.collision || brickball1.collision ) {
+		if (brickball.collision && config.fired) {
 			stren--;
 			config.Score++;
+		}
+		else if (brickball1.collision && config.fired) {
+			stren--;
+			config.Score++;
+			cout << " the other ball";
 		}
 	
 	
