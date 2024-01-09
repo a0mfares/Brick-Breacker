@@ -83,7 +83,7 @@ void hardBrick::collisionAction()
 		config.Score++;
 		cout << " the other ball";
 	}
-	if (config.fired && brickball.collision ) {
+	if (config.fired && brickball.collision) {
 		stren--;
 		stren--;
 		stren--;

@@ -9,27 +9,18 @@ collectable::collectable(point r_uprleft, int r_width, int r_height, game* r_pGa
 
 void collectable::move()
 {
-   
-    if (isColliding(this, pGame->getpadle()).collision) {
-        this->deleteball();
-        pGame->getpadle()->draw();
-        
-    }
-    else if(uprLft.y <= config.paddleAreaHeight - 7){
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        uprLft.y++;
-        this->draw();
-    }
-    
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    uprLft.y++;
+    this->draw();
 }
 
 void collectable::draw()
@@ -43,24 +34,17 @@ void collectable::draw()
     else if (config.collecteditems == 3) c = GREEN;
     else if (config.collecteditems == 4) c = VIOLETRED;
     else if (config.collecteditems == 5) c = YELLOW;
-    
+    else if (config.collecteditems == 6) c = BROWN;
+    else if (config.collecteditems == 7) c = GOLD;
 
 
    
     pWind->SetPen(c, 1);
     pWind->SetBrush(c);
     pWind->DrawCircle(uprLft.x, uprLft.y, width, FILLED);
-    
 }
 
 void collectable::setpoint(point p)
 {
     uprLft = p;
-}
-
-void collectable::deleteball()
-{
-    pGame->getWind()->SetPen(LAVENDER, 1);
-    pGame->getWind()->SetBrush(LAVENDER);
-    pGame->getWind()->DrawCircle(uprLft.x, uprLft.y, width, FILLED);
 }

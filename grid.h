@@ -31,6 +31,7 @@ public:
 	void save();
 	void load();
 	int addBrickFromFile(int row, int col, int typ);
-
+	int getrows();
+	int getcol();
 };
 

@@ -3,7 +3,8 @@
 #include "grid.h"
 #include "gameConfig.h"
 #include <iostream>
-
+#include <libxl.h>
+using namespace libxl;
 using namespace std;
 
 ////////////////////////////////////////////////////  class toolbarIcon   ////////////////////////////////////////////////////
@@ -67,6 +68,8 @@ iconSave::iconSave(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 
 void iconSave::onClick()
 {
+	
+	pGame->printMessage("Saved");
 	pGame->getGrid()->save();
 }
 iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
@@ -74,8 +77,8 @@ iconLoad::iconLoad(point r_lwrleft, int r_width, int r_height, game* r_pGame) :
 {}
 
 void iconLoad::onClick() {
-	
 	pGame->getGrid()->load();
+	
 }
 
 
@@ -276,13 +279,3 @@ bool toolbar::handleClick(int x, int y)
 }
 
 
-
-iconRestart::iconRestart(point r_uprleft, int r_width, int r_height, game* r_pGame) : toolbarIcon(r_uprleft,r_width,r_height,r_pGame)
-{
-	imageName = "images\\ToolbarIcons\\restart.jpg";
-}
-
-void iconRestart::onClick()
-{
-	pGame->setRestrart(true);
-}

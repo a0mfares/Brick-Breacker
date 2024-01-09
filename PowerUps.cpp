@@ -93,7 +93,7 @@ void Magnet::collisionAction()
 	auto paddle = pGame->getpadle();
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-		pGame->setMagnet(true);
+		config.magnet = true;
 		auto ball = pGame->getball();
 		ball->deleteball();
 		ball->setxyinczero();
@@ -126,13 +126,10 @@ MultipleBalls::MultipleBalls(point r_uprleft, int r_width, int r_height, game* r
 void MultipleBalls::collisionAction()
 {
 	auto paddle = pGame->getpadle();
-
 	auto iscollected = isColliding(this, paddle);
 	if (iscollected.collision) {
-		pGame->getball1()->draw();
-		pGame->getball1()->moveball();
-		cout << "Running";
-
+		config.multibleballs = true;
+		
 		
 	}
 }

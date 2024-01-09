@@ -7,7 +7,6 @@
 using namespace libxl;
 
 
-
 grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	drawable(r_uprleft, wdth, hght, pG)
 {
@@ -27,15 +26,15 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	Ballleft.x = 60;
 	Ballleft.y = 60;
 
-	colected = new collectable * [6];
+	colected = new collectable * [8];
 	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, pGame);
-	//colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
-	//colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[3] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[4] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[5] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
 	
 
 }
@@ -149,6 +148,7 @@ point grid::collisionAction()
 					// Handle brick-ball collision
 					brickMatrix[i][j]->collisionAction();
 					// Reflect the ball's direction
+					/*pGame->getball()->checkforboundies(brickMatrix[i][j]);*/
 
 					pGame->getball()->reflectball(brickMatrix[i][j]);
 						
@@ -164,22 +164,14 @@ point grid::collisionAction()
 						newpoint.y += config.brickHeight / 2;
 						
 						this->deleteBrickOncollison(index);
-						if (config.breaked == rand()% 5) {
+						if (config.breaked == 2 && config.getcollectedtimer) {
 
-<<<<<<< HEAD
-							config.collecteditems = rand() % 7;
-=======
-							//config.collecteditems = rand() % 8;
->>>>>>> parent of ccbeae0 (a7sn mn mafe44)
+							config.collecteditems = rand() % 8;
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
-							if (pGame->getC()) {
-								colected[config.collecteditems]->draw();
-							}
-							
-							
+							colected[config.collecteditems]->draw();
 							config.getcollected = true;
-							
+							config.getcollectedtimer = false;
 							config.breaked = 0;
 							random = rand() % 3;
 							pGame->getWind()->UpdateBuffer();
@@ -227,9 +219,10 @@ collectable** grid::getcollected()
 	return colected;
 }
 
+
 void grid::save()
 {
-	
+
 	Book* book = xlCreateBook();
 	int col = 0;
 	int row = 0;
@@ -243,7 +236,7 @@ void grid::save()
 					if (brickMatrix[i][j] != nullptr) {
 						sheet->writeNum(row, col++, i);
 						sheet->writeNum(row, col++, j);
-						sheet->writeNum(row , col++,brickMatrix[i][j]->getType());
+						sheet->writeNum(row, col++, brickMatrix[i][j]->getType());
 						row++;
 						col = 0;
 					}
@@ -275,11 +268,11 @@ void grid::load()
 					CellType cellType = sheet->cellType(row, col);
 					int d = sheet->readNum(row, col);
 					values[count++] = d;
-					
-					
+
+
 				}
-				addBrickFromFile(values[0], values[1], values[2]);
 				
+				addBrickFromFile(values[0], values[1], values[2]);
 				cout << endl;
 				this->draw();
 				for (int i = 0; i < 3; i++) {
@@ -290,14 +283,14 @@ void grid::load()
 				count = 0;
 
 			}
-			
-			
-			
+
+
+
 		}
 	}
 
 	book->release();
-	
+
 }
 
 int grid::addBrickFromFile(int row, int col, int typ)
@@ -323,38 +316,46 @@ int grid::addBrickFromFile(int row, int col, int typ)
 	return 1;
 }
 
+int grid::getrows()
+{
+	return rows;
+}
+
+int grid::getcol()
+{
+	return cols;
+}
 
 
+//void grid::randomPoint()
+//{
+//	point randomPoint;
+//	randomPoint.x = uprLft.x + (rand() % (config.windWidth / config.brickWidth)) * config.brickWidth;
+//	randomPoint.y = uprLft.y + (rand() % (config.gridHeight / config.brickHeight)) * config.brickHeight;
+//	BrickType randomBrickType = static_cast<BrickType>(rand() % 3);
+//	int gridCellRowIndex = (randomPoint.y - uprLft.y) / config.brickHeight;
+//	int gridCellColIndex = (randomPoint.x - uprLft.x) / config.brickWidth;
+//
+//	// Now, align the upper left corner of the new brick with the corner of the clicked grid cell
+//	point newBrickUpleft;
+//	newBrickUpleft.x = uprLft.x + gridCellColIndex * config.brickWidth;
+//	newBrickUpleft.y = uprLft.y + gridCellRowIndex * config.brickHeight;
+//
+//	switch (randomBrickType)
+//	{
+//	case BRK_NRM: // The new brick to add is Normal Brick
+//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new normalBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+//		break;
+//	case BRK_HRD: // The new brick to add is Hard Brick
+//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new hardBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+//		break;
+//	case BRK_ROCK: // The new brick to add is Rock
+//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new Rock(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
+//		break;
+//		// TODO: Handle more types
+//	}
+//	
+//
+//}
 
 
-					//void grid::randomPoint()
-					//{
-					//	point randomPoint;
-					//	randomPoint.x = uprLft.x + (rand() % (config.windWidth / config.brickWidth)) * config.brickWidth;
-					//	randomPoint.y = uprLft.y + (rand() % (config.gridHeight / config.brickHeight)) * config.brickHeight;
-					//	BrickType randomBrickType = static_cast<BrickType>(rand() % 3);
-					//	int gridCellRowIndex = (randomPoint.y - uprLft.y) / config.brickHeight;
-					//	int gridCellColIndex = (randomPoint.x - uprLft.x) / config.brickWidth;
-					//
-					//	// Now, align the upper left corner of the new brick with the corner of the clicked grid cell
-					//	point newBrickUpleft;
-					//	newBrickUpleft.x = uprLft.x + gridCellColIndex * config.brickWidth;
-					//	newBrickUpleft.y = uprLft.y + gridCellRowIndex * config.brickHeight;
-					//
-					//	switch (randomBrickType)
-					//	{
-					//	case BRK_NRM: // The new brick to add is Normal Brick
-					//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new normalBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
-					//		break;
-					//	case BRK_HRD: // The new brick to add is Hard Brick
-					//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new hardBrick(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
-					//		break;
-					//	case BRK_ROCK: // The new brick to add is Rock
-					//		brickMatrix[gridCellRowIndex][gridCellColIndex] = new Rock(newBrickUpleft, config.brickWidth, config.brickHeight, pGame);
-					//		break;
-					//		// TODO: Handle more types
-					//	}
-					//	
-					//
-					//}
-				

@@ -290,17 +290,7 @@ void game::updatelive()
 
 	}
 	if (config.Lives == 0) {
-		ballspot->deleteball();
-		padlespot->setpoint(PadleUpperleft);
-		ballspot->setpoint(BallUpperleft);
-		config.Lives = 3;
-		/*ballspot->draw();
-		padlespot->draw();*/
-		ballspot->resetxyinc();
-		
-
-		pWind->FlushKeyQueue();
-		gameover = true;
+		setgameover(true);
 		
 	}
 }
@@ -366,16 +356,7 @@ void game::statusbardraw()
 
 }
 
-<<<<<<< HEAD
-void game::setRestrart(bool x)
-{
-	restart = true;
-}
-
 void game::collectedtimer(bool &x)
-=======
-void game::collectedtimer()
->>>>>>> parent of ccbeae0 (a7sn mn mafe44)
 {
 	if (config.j <= 29) {
 		config.getcollectedtimer = true;
@@ -412,15 +393,8 @@ Ball* game::getball3() const
 	return b3;
 }
 
-void game::setMagnet(bool x)
-{
-	magnet = true;
-}
 
-bool game::getC()
-{
-	return getcollectedtimer;
-}
+
 
 //collectable** game::getcollectable() const
 //{
@@ -463,20 +437,21 @@ void game::go()
 				gameToolbar->handleClick(x, y);
 			}
 
-			if (gameover) {
-
-				pWind->SetPen(LAVENDER, 1);
-				pWind->SetBrush(LAVENDER);
-				pWind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-				gameToolbar->draw();
-				bricksGrid->draw();
-
-				ballspot->draw();
-				padlespot->draw();
+			if (gameover == true) {
+				pWind->SetPen(BLACK, 1);
+				pWind->SetBrush(BLACK);
+				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				pWind->SetPen(DARKRED, 1);
+				pWind->SetBrush(DARKRED);
+				pWind->SetFont(50,1,ROMAN,"Times New Roman");
+				pWind->DrawString(config.windWidth / 2 - 100, config.windHeight / 2 - 100, "GAME OVER");
+				pWind->SetPen(WHITE, 1);
+				pWind->SetBrush(WHITE);
+				pWind->DrawString(config.windWidth / 2 + 100, config.windHeight / 2 + 100, "Score : "+config.Score);
 				pWind->UpdateBuffer();
 
-
 			}
+
 		}
 
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
@@ -510,11 +485,7 @@ void game::go()
 					ballspot->moveball();
 					this->updatelive();
 					this->statusbardraw();
-<<<<<<< HEAD
-					this->collectedtimer(getcollectedtimer);
-=======
-					this->collectedtimer();
->>>>>>> parent of ccbeae0 (a7sn mn mafe44)
+					this->collectedtimer(config.getcollectedtimer);
 					this->timer(config.widen);
 					this->timer(config.shrink);
 					this->timer(config.speedUp);
@@ -533,6 +504,7 @@ void game::go()
 						/*bricksGrid->getcollected()[0]->draw();*/
 						pWind->UpdateBuffer();
 					}
+					
 					bricksGrid->collisionAction();
 
 

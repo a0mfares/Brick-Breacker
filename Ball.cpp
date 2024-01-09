@@ -28,7 +28,6 @@ void Ball::moveball()
     // Check for paddle-ball collision
     this->checkforboundies(pGame->getpadle());
     this->reflectball();
-   
     // Draw the game elements
     this->drawgameelements();
     // Update ball position
@@ -125,7 +124,23 @@ void Ball::reflectball()
 
 void Ball::reflectball(collidable* o)
 {
+    
+    
     Yinc = -Yinc;
+   
+    // Determine if the collision is on the left or right side
+    bool collideLeft = uprLft.x <  o->getBoundingBox().upperLeft.x&& uprLft.x + BallRad >  o->getBoundingBox().upperLeft.x;
+    bool collideRight = uprLft.x > o->getBoundingBox().lowerRight.x && uprLft.x - BallRad < o->getBoundingBox().lowerRight.x;
+
+    // Adjust the position and reflect horizontally if collision is on the left or right side
+    if (collideLeft) {
+        uprLft.x = o->getBoundingBox().upperLeft.x - BallRad; // Adjust position to the left edge of the object
+        Xinc = -std::abs(Xinc); // Reflect to the left
+    }
+    else if (collideRight) {
+        uprLft.x = o->getBoundingBox().lowerRight.x + BallRad; // Adjust position to the right edge of the object
+        Xinc = std::abs(Xinc); // Reflect to the right
+    }
     this->updatepos();
 }
 
@@ -168,14 +183,15 @@ void Ball::moveball1()
 {
     pGame->getWind()->SetBuffering(true);
     pGame->getWind()->FlushKeyQueue();
-   
+    // Check for paddle-ball collision
     this->checkforboundies(pGame->getpadle());
     this->reflectball();
-    
+    // Draw the game elements
   
-    
+    // Update ball position
     this->updatepos();
-    
+    //draw ball
+    this->draw();
 }
 
 
