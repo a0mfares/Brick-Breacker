@@ -26,15 +26,15 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	Ballleft.x = 60;
 	Ballleft.y = 60;
 
-	colected = new collectable * [6];
+	colected = new collectable * [7];
 	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, pGame);
 	/*colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);*/
-	/*colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);*/
-	colected[3] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[4] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[5] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[3] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[4] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[5] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[6] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
 	
 
 }
@@ -144,13 +144,16 @@ point grid::collisionAction()
 		for (int j = 0; j < cols; j++) {
 			if (brickMatrix[i][j] != nullptr) {
 				auto BrickBallCollide = brickMatrix[i][j]->isColliding(pGame->getball(), brickMatrix[i][j]);
-				if (BrickBallCollide.collision) {
+				auto BrickBallCollide1 = brickMatrix[i][j]->isColliding(pGame->getball1(), brickMatrix[i][j]);
+				if (BrickBallCollide.collision || BrickBallCollide1.collision) {
 					// Handle brick-ball collision
 					brickMatrix[i][j]->collisionAction();
 					// Reflect the ball's direction
 					/*pGame->getball()->checkforboundies(brickMatrix[i][j]);*/
 
 					pGame->getball()->reflectball(brickMatrix[i][j]);
+					pGame->getball1()->reflectball(brickMatrix[i][j]);
+					/*pGame->getball2()->reflectball(brickMatrix[i][j]);*/
 						
 
 					/*point index;*/
@@ -166,7 +169,7 @@ point grid::collisionAction()
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2 && config.getcollectedtimer) {
 
-							config.collecteditems = rand() % 6;
+							/*config.collecteditems = rand() % 6;*/
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
 							colected[config.collecteditems]->draw();

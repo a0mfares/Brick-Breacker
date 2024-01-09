@@ -505,8 +505,10 @@ void game::go()
 					this->timer(config.magnet);
 					this->timer(config.multibleballs);
 					padlespot->setWidth();
+					
 
 					padlespot->padlemove();
+
 					if (config.getcollected) {
 						bricksGrid->getcollected()[config.collecteditems]->move();
 						bricksGrid->getcollected()[config.collecteditems]->collisionAction();
@@ -517,7 +519,11 @@ void game::go()
 							padlespot->draw();
 							config.getcollectedtimer = false;
 						}
+						if (config.multibleballs) {
 
+							b1->moveball1();
+
+						}
 						
 						pWind->UpdateBuffer();
 					}
