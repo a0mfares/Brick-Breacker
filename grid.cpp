@@ -169,7 +169,7 @@ point grid::collisionAction()
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2 && config.getcollectedtimer) {
 
-							/*config.collecteditems = rand() % 6;*/
+							config.collecteditems = rand() % 6;
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
 							colected[config.collecteditems]->draw();
