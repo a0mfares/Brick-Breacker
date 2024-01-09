@@ -32,6 +32,8 @@ void iconPlay::onClick()
 	pGame->setplay(true);
 	pGame->setgameover(false);
 	pGame->gameMode = game::MODE::MODE_PLAY;
+	pGame->getball()->resetxyinc();
+	config.breaked = 0;
 
 	
 }

@@ -495,10 +495,13 @@ void game::go()
 				if(config.Score == 0)pWind->DrawString(config.windWidth / 2 -50, config.windHeight / 2 , "Score : 0");
 				else pWind->DrawString(config.windWidth / 2 -50, config.windHeight / 2 , "Score : "+ to_string(config.Score));
 				pWind->UpdateBuffer();
-				Pause(100);
+				Pause(1000);
 				COUNT++;
 				gameover = false;
 				allclear = false;
+				config.Score = 0;
+				config.Lives = 3;
+
 
 			}
 			if (COUNT > 0) {
