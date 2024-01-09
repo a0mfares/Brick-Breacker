@@ -366,15 +366,19 @@ void game::statusbardraw()
 
 }
 
+<<<<<<< HEAD
 void game::setRestrart(bool x)
 {
 	restart = true;
 }
 
 void game::collectedtimer(bool &x)
+=======
+void game::collectedtimer()
+>>>>>>> parent of ccbeae0 (a7sn mn mafe44)
 {
 	if (config.j <= 29) {
-		x = true;
+		config.getcollectedtimer = true;
 	}
 	else {
 		x = false;
@@ -506,7 +510,11 @@ void game::go()
 					ballspot->moveball();
 					this->updatelive();
 					this->statusbardraw();
+<<<<<<< HEAD
 					this->collectedtimer(getcollectedtimer);
+=======
+					this->collectedtimer();
+>>>>>>> parent of ccbeae0 (a7sn mn mafe44)
 					this->timer(config.widen);
 					this->timer(config.shrink);
 					this->timer(config.speedUp);

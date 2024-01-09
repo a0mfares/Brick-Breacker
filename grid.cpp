@@ -166,7 +166,11 @@ point grid::collisionAction()
 						this->deleteBrickOncollison(index);
 						if (config.breaked == rand()% 5) {
 
+<<<<<<< HEAD
 							config.collecteditems = rand() % 7;
+=======
+							//config.collecteditems = rand() % 8;
+>>>>>>> parent of ccbeae0 (a7sn mn mafe44)
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
 							if (pGame->getC()) {
