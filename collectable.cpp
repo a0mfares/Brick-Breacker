@@ -36,7 +36,7 @@ void collectable::draw()
     else if (config.collecteditems == 2) c = BLUE;
     else if (config.collecteditems == 3) c = GREEN;
     else if (config.collecteditems == 4) c = GOLD;
-    else if (config.collecteditems == 5) c = YELLOW;
+    else if (config.collecteditems == 5) c = BROWN;
     /*else if (config.collecteditems == 6) c = BROWN;
     else if (config.collecteditems == 7) c = GOLD;*/
 
