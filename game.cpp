@@ -366,18 +366,10 @@ void game::statusbardraw()
 
 }
 
-void game::setRestrart(bool x)
-{
-	restart = true;
-}
-
 void game::collectedtimer(bool &x)
 {
 	if (config.j <= 29) {
 		x = true;
-	}
-	else {
-		x = false;
 	}
 }
 
@@ -408,16 +400,6 @@ Ball* game::getball3() const
 	return b3;
 }
 
-void game::setMagnet(bool x)
-{
-	magnet = true;
-}
-
-bool game::getC()
-{
-	return getcollectedtimer;
-}
-
 //collectable** game::getcollectable() const
 //{
 //	return colected;
@@ -429,36 +411,36 @@ bool game::getC()
 
 
 ////////////////////////////////////////////////////////////////////////
-void game::go()
+void game::go() 
 {
 	//This function reads the position where the user clicks to determine the desired operation
-	int x, y;
-
+	int x,y;
+	
 	char c;
-
-
+	
+	
 
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - Brick Breaker (CIE202-project) - - - - - - - - - -");
 
 	printMessage("Ready...");
-
+	
 	do
 	{
-
-
+		
+		
 		/*pWind->FlushKeyQueue();*/
 		pWind->GetMouseClick(x, y);	//Get the coordinates of the user click
-
+		
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
 			//[1] If user clicks on the Toolbar
 			if (y >= 0 && y < config.toolBarHeight)
 			{
-
+				
 				gameToolbar->handleClick(x, y);
 			}
-
+			
 			if (gameover) {
 
 				pWind->SetPen(LAVENDER, 1);
@@ -466,7 +448,7 @@ void game::go()
 				pWind->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
 				gameToolbar->draw();
 				bricksGrid->draw();
-
+				
 				ballspot->draw();
 				padlespot->draw();
 				pWind->UpdateBuffer();
@@ -474,10 +456,10 @@ void game::go()
 
 			}
 		}
-
+		
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
 		{
-
+			
 			char cKeyData;
 			keytype kType;
 			kType = pWind->GetKeyPress(cKeyData);
@@ -485,8 +467,8 @@ void game::go()
 			if (kType == ASCII && cKeyData == ' ') {
 				do
 				{
-
-
+					
+					
 					config.j += 0.1;
 					pWind->GetMouseClick(x, y);
 					kType = pWind->GetKeyPress(cKeyData);
@@ -499,14 +481,30 @@ void game::go()
 						gameToolbar->handleClick(x, y);
 
 					}
+					if (config.magnet) {
+						char c;
+						keytype k;
+						k = this->getWind()->GetKeyPress(c);
 
-					
+						if (k == ASCII && c == ' ') {
+							ballspot->resetxyinc();
+							config.magnet = false;
+
+						}
+					}
+					else if (config.multibleballs) {
+						b1->draw();
+						b1->moveball1();
+						pWind->UpdateBuffer();
+						/*b2->moveball();
+						b3->moveball();*/
+					}
 
 
 					ballspot->moveball();
 					this->updatelive();
 					this->statusbardraw();
-					this->collectedtimer(getcollectedtimer);
+					this->collectedtimer(config.getcollectedtimer);
 					this->timer(config.widen);
 					this->timer(config.shrink);
 					this->timer(config.speedUp);
@@ -516,42 +514,42 @@ void game::go()
 					this->timer(config.magnet);
 					this->timer(config.multibleballs);
 					padlespot->setWidth();
-
+					
 					padlespot->padlemove();
 					if (config.getcollected) {
 						bricksGrid->getcollected()[config.collecteditems]->move();
 						bricksGrid->getcollected()[config.collecteditems]->collisionAction();
-
 						/*bricksGrid->getcollected()[0]->draw();*/
 						pWind->UpdateBuffer();
 					}
 					bricksGrid->collisionAction();
+					
+					
+					
+				
+
+					
 
 
+					
 
 
-
-
-
-
-
-
-
-				} while (isplay && !gameover && !ispause && config.i < 10 && config.j < 60);
-
-
-
+				} while (isplay  && !gameover && !ispause && config.i < 10 && config.j < 60 );
+				
+				
+				
 
 				gameMode = MODE_DSIGN;
 
 
 			}
-
-
-
-
+			
+			
+			
+			
 		}
-
+		
+		
 
 	} while (!isExit );
 	

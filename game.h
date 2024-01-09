@@ -39,7 +39,6 @@ class game
 	bool ispause = false;
 	bool gameover = false;
 	bool restart = false;
-	bool getcollectedtimer = false;
 	int COUNT = 0;
 	
 	
@@ -98,7 +97,6 @@ public:
 	Ball* getball2() const;
 	Ball* getball3() const;
 	void setMagnet(bool x);
-	bool getC();
 
 
 
