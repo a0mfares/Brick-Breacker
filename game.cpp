@@ -515,7 +515,6 @@ void game::go()
 				padlespot->draw();
 				this->statusbardraw();
 				ballspot->setxyinczero();
-				
 				point BallUpperleft;
 				BallUpperleft.x = config.windWidth / 2;
 				BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
@@ -592,23 +591,15 @@ void game::go()
 					}
 					
 					bricksGrid->collisionAction();
+
 					bricksGrid->check();
+
 					allclear = bricksGrid->getALL();
-					
-					
-
-
-
-
-
-
-
-
 
 				} while (isplay && !gameover && !ispause && config.i < 10 && config.j < 60 &&!allclear);
 
 
-				if (bricksGrid->getALL()) isplay = false;
+				/*if (bricksGrid->getALL()) isplay = false;*/
 
 				gameMode = MODE_DSIGN;
 
@@ -637,4 +628,5 @@ void game::move()
 	isplay = false;
 
 }
+
 

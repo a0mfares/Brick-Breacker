@@ -26,15 +26,15 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	Ballleft.x = 60;
 	Ballleft.y = 60;
 
-	colected = new collectable * [7];
+	colected = new collectable * [8];
 	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, pGame);
-	/*colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);*/
-	colected[3] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[4] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[5] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[6] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
 	
 
 }
@@ -149,11 +149,10 @@ point grid::collisionAction()
 					// Handle brick-ball collision
 					brickMatrix[i][j]->collisionAction();
 					// Reflect the ball's direction
-					/*pGame->getball()->checkforboundies(brickMatrix[i][j]);*/
 
 					pGame->getball()->reflectball(brickMatrix[i][j]);
 					pGame->getball1()->reflectball(brickMatrix[i][j]);
-					/*pGame->getball2()->reflectball(brickMatrix[i][j]);*/
+					
 						
 
 					/*point index;*/
@@ -169,14 +168,12 @@ point grid::collisionAction()
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2 && config.getcollectedtimer) {
 
-							config.collecteditems = rand() % 6;
-							cout << config.collecteditems;
+							config.collecteditems = rand() % 7;
 							colected[config.collecteditems]->setpoint(newpoint);
 							colected[config.collecteditems]->draw();
 							config.getcollected = true;
 							config.getcollectedtimer = false;
 							config.breaked = 0;
-							random = rand() % 3;
 							pGame->getWind()->UpdateBuffer();
 
 							

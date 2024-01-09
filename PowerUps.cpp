@@ -102,7 +102,7 @@ void Magnet::collisionAction()
 		r.y = paddle->getBoundingBox().upperLeft.y;
 		ball->setpoint(r);
 		ball->draw();
-		/*ball->resetxyinc();*/
+		ball->resetxyinc();
 		
 		
 		pGame->getWind()->UpdateBuffer();
