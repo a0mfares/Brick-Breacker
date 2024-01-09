@@ -482,7 +482,7 @@ void game::go()
 				gameToolbar->handleClick(x, y);
 			}
 
-			if (gameover) {
+			if (gameover|| allclear) {
 				pWind->SetPen(BLACK, 1);
 				pWind->SetBrush(BLACK);
 				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
@@ -495,9 +495,34 @@ void game::go()
 				if(config.Score == 0)pWind->DrawString(config.windWidth / 2 -50, config.windHeight / 2 , "Score : 0");
 				else pWind->DrawString(config.windWidth / 2 -50, config.windHeight / 2 , "Score : "+ to_string(config.Score));
 				pWind->UpdateBuffer();
+				Pause(100);
+				COUNT++;
+				gameover = false;
+				allclear = false;
 
 			}
+			if (COUNT > 0) {
+				this->statusbardraw();
+				
+				pWind->SetPen(LAVENDER, 1);
+				pWind->SetBrush(LAVENDER);
+				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+				gameToolbar->draw();
+				bricksGrid->draw();
+				padlespot->draw();
+				this->statusbardraw();
+				ballspot->setxyinczero();
+				
+				point BallUpperleft;
+				BallUpperleft.x = config.windWidth / 2;
+				BallUpperleft.y = config.paddleAreaHeight - config.BallRad;
+				ballspot->setpoint(BallUpperleft);
+				ballspot->draw();
+				pWind->UpdateBuffer();
+			}
 
+			
+			
 		}
 
 		if (gameMode == MODE_PLAY)		//Game is in the play mode
@@ -564,6 +589,8 @@ void game::go()
 					}
 					
 					bricksGrid->collisionAction();
+					bricksGrid->check();
+					allclear = bricksGrid->getALL();
 					
 					
 
@@ -575,7 +602,7 @@ void game::go()
 
 
 
-				} while (isplay && !gameover && !ispause && config.i < 10 && config.j < 60);
+				} while (isplay && !gameover && !ispause && config.i < 10 && config.j < 60 &&!allclear);
 
 
 				if (bricksGrid->getALL()) isplay = false;

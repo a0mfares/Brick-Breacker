@@ -113,9 +113,12 @@ void iconAddNormalBrick::onClick()
 		pGrid->addBrick(BRK_NRM, clicked);
 		pGrid->draw();
 		t = pGame->getMouseClick(x, y);
+		pGame->getWind()->UpdateBuffer();
 	}
 
 	pGame->printMessage("Ready...");
+	pGame->getWind()->UpdateBuffer();
+	
 
 }
 
@@ -268,6 +271,7 @@ bool toolbar::handleClick(int x, int y)
 	int clickedIconIndex = (x / config.iconWidth);
 	/*cout << clickedIconIndex;*/
 	iconsList[clickedIconIndex]->onClick();	//execute onClick action of clicled icon
+	pGame->getWind()->UpdateBuffer();
 	
 
 

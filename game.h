@@ -38,6 +38,7 @@ class game
 	bool ispause = false;
 	bool gameover = false;
 	int COUNT = 0;
+	bool allclear= false;
 	
 	
 	
