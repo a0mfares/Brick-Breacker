@@ -15,6 +15,7 @@ class grid:public drawable
 	int rows, cols;
 	int random = rand() % 4;
 	collectable** colected;
+	bool allNullptr ;
 	
 	
 public:
@@ -34,5 +35,6 @@ public:
 	int getrows();
 	int getcol();
 	void check();
+	bool getALL();
 };
 

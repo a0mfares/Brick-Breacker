@@ -9,7 +9,7 @@ collectable::collectable(point r_uprleft, int r_width, int r_height, game* r_pGa
 
 void collectable::move()
 {
-    if (uprLft.y <= config.paddleAreaHeight - 5) {
+    if (uprLft.y <= config.paddleAreaHeight -2 ) {
         uprLft.y++;
         uprLft.y++;
         uprLft.y++;
@@ -23,10 +23,7 @@ void collectable::move()
         uprLft.y++;
         this->draw();
     }
-    if (isColliding(this, pGame->getpadle()).collision) {
-        this->deleteball();
-        pGame->getpadle()->draw();
-    }
+   
 }
 
 void collectable::draw()
@@ -38,10 +35,10 @@ void collectable::draw()
     else if (config.collecteditems == 1) c = VIOLET;
     else if (config.collecteditems == 2) c = BLUE;
     else if (config.collecteditems == 3) c = GREEN;
-    else if (config.collecteditems == 4) c = VIOLETRED;
+    else if (config.collecteditems == 4) c = GOLD;
     else if (config.collecteditems == 5) c = YELLOW;
-    else if (config.collecteditems == 6) c = BROWN;
-    else if (config.collecteditems == 7) c = GOLD;
+    /*else if (config.collecteditems == 6) c = BROWN;
+    else if (config.collecteditems == 7) c = GOLD;*/
 
 
    

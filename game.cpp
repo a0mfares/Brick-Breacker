@@ -344,15 +344,27 @@ void game::updateTime(double i , double j)
 void game::statusbardraw()
 {
 	
-	pWind->SetPen(config.statusBarColor, 1);
-	pWind->SetBrush(config.statusBarColor);
-	pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
-	pWind->SetPen(BLACK, 1);
-	pWind->SetBrush(BLACK);
-	//pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
-	pWind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
-	pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
-	updateTime(config.i,config.j);
+	if (bricksGrid->getALL()) {
+		gameMode = MODE_DSIGN;
+		pWind->SetPen(config.statusBarColor, 1);
+		pWind->SetBrush(config.statusBarColor);
+		pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+		pWind->SetPen(BLACK, 1);
+		pWind->SetBrush(BLACK);
+		pWind->DrawString(10, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
+		pWind->UpdateBuffer();
+	}
+	else {
+		pWind->SetPen(config.statusBarColor, 1);
+		pWind->SetBrush(config.statusBarColor);
+		pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+		pWind->SetPen(BLACK, 1);
+		pWind->SetBrush(BLACK);
+		//pGame->getWind()->DrawString(10, config.windHeight - config.statusBarHeight, pGame->updateTIme());
+		pWind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
+		pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
+		updateTime(config.i, config.j);
+	}
 
 }
 
@@ -361,9 +373,7 @@ void game::collectedtimer(bool &x)
 	if (config.j <= 29) {
 		config.getcollectedtimer = true;
 	}
-	else {
-		x = false;
-	}
+	
 }
 
 void game::timer(bool &x)
@@ -445,9 +455,10 @@ void game::go()
 				pWind->SetBrush(DARKRED);
 				pWind->SetFont(50,1,ROMAN,"Times New Roman");
 				pWind->DrawString(config.windWidth / 2 - 100, config.windHeight / 2 - 100, "GAME OVER");
-				pWind->SetPen(WHITE, 1);
-				pWind->SetBrush(WHITE);
-				pWind->DrawString(config.windWidth / 2 + 100, config.windHeight / 2 + 100, "Score : "+config.Score);
+				pWind->SetPen(YELLOW);
+				pWind->SetBrush(YELLOW);
+				if(config.Score == 0)pWind->DrawString(config.windWidth / 2 -50, config.windHeight / 2 , "Score : 0");
+				else pWind->DrawString(config.windWidth / 2 -50, config.windHeight / 2 , "Score : "+ to_string(config.Score));
 				pWind->UpdateBuffer();
 
 			}
@@ -478,7 +489,6 @@ void game::go()
 						gameToolbar->handleClick(x, y);
 
 					}
-
 					
 
 
@@ -501,13 +511,20 @@ void game::go()
 						bricksGrid->getcollected()[config.collecteditems]->move();
 						bricksGrid->getcollected()[config.collecteditems]->collisionAction();
 
-						/*bricksGrid->getcollected()[0]->draw();*/
+						if (bricksGrid->getcollected()[config.collecteditems]->isColliding(bricksGrid->getcollected()[config.collecteditems], padlespot).collision) {
+
+							bricksGrid->getcollected()[config.collecteditems]->deleteball();
+							padlespot->draw();
+							config.getcollectedtimer = false;
+						}
+
+						
 						pWind->UpdateBuffer();
 					}
 					
 					bricksGrid->collisionAction();
-
-					bricksGrid->check();
+					
+					
 
 
 
@@ -520,7 +537,7 @@ void game::go()
 				} while (isplay && !gameover && !ispause && config.i < 10 && config.j < 60);
 
 
-
+				if (bricksGrid->getALL()) isplay = false;
 
 				gameMode = MODE_DSIGN;
 

@@ -26,15 +26,15 @@ grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	Ballleft.x = 60;
 	Ballleft.y = 60;
 
-	colected = new collectable * [8];
+	colected = new collectable * [6];
 	colected[0] = new FireBall(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[1] = new WindGlide(Ballleft, config.BallRad, config.BallRad, pGame);
 	colected[2] = new WidePaddle(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[5] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[6] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
-	colected[7] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
+	/*colected[3] = new Magnet(Ballleft, config.BallRad, config.BallRad, pGame);*/
+	/*colected[4] = new MultipleBalls(Ballleft, config.BallRad, config.BallRad, pGame);*/
+	colected[3] = new ReverseDirection(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[4] = new QuickSand(Ballleft, config.BallRad, config.BallRad, pGame);
+	colected[5] = new ShrinkPaddle(Ballleft, config.BallRad, config.BallRad, pGame);
 	
 
 }
@@ -166,7 +166,7 @@ point grid::collisionAction()
 						this->deleteBrickOncollison(index);
 						if (config.breaked == 2 && config.getcollectedtimer) {
 
-							config.collecteditems = rand() % 8;
+							config.collecteditems = rand() % 6;
 							cout << config.collecteditems;
 							colected[config.collecteditems]->setpoint(newpoint);
 							colected[config.collecteditems]->draw();
@@ -328,24 +328,24 @@ int grid::getcol()
 
 void grid::check()
 {
-	auto pWind = pGame->getWind();
+	allNullptr = true;
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
-			if (brickMatrix == nullptr) {
-				pWind->SetPen(BLACK, 1);
-				pWind->SetBrush(BLACK);
-				pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
-				pWind->SetPen(DARKRED, 1);
-				pWind->SetBrush(DARKRED);
-				pWind->SetFont(50, 1, ROMAN, "Times New Roman");
-				pWind->DrawString(config.windWidth / 2 - 100, config.windHeight / 2 - 100, "GAME OVER");
-				pWind->SetPen(WHITE, 1);
-				pWind->SetBrush(WHITE);
-				pWind->DrawString(config.windWidth / 2 + 100, config.windHeight / 2 + 100, "Score : " + config.Score);
-				pWind->UpdateBuffer();
+			if (brickMatrix[i][j] != nullptr) {
+				allNullptr = false;
+				break;  
 			}
 		}
 	}
+
+	if (allNullptr) {
+		pGame->statusbardraw();
+	}
+}
+
+bool grid::getALL()
+{
+	return allNullptr;
 }
 
 
