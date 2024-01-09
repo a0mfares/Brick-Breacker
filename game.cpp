@@ -278,17 +278,52 @@ void game::updatelive()
 	point PadleUpperleft;
 	PadleUpperleft.x = (config.windWidth / 2) - (config.padlewidth / 2);
 	PadleUpperleft.y = config.paddleAreaHeight;
+	/*if (b1->getBoundingBox().lowerRight.y > config.windHeight && config.Lives > 0) {
+		config.multibleballs = false;
+		b1->setxyinczero();
+		b1->deleteball();
 
-	if (ballspot->getBoundingBox().lowerRight.y > config.windHeight && config.Lives>0) {
-		--config.Lives;
-		ballspot->setpoint(BallUpperleft);
-		padlespot->setpoint(PadleUpperleft);
-		ballspot->resetxyinc();
-		pWind->FlushKeyQueue();
+	}*/
+	if (config.multibleballs) {
+		if ((ballspot->getBoundingBox().lowerRight.y > config.windHeight && config.Lives > 0)&& (b1->getBoundingBox().lowerRight.y > config.windHeight && config.Lives > 0)) {
+
+			--config.Lives;
+			ballspot->setpoint(BallUpperleft);
+			padlespot->setpoint(PadleUpperleft);
+			ballspot->resetxyinc();
+			pWind->FlushKeyQueue();
+			config.multibleballs = false;
+			b1->setxyinczero();
+			b1->deleteball();
+			
 
 
+		}
+		if ((ballspot->getBoundingBox().lowerRight.y > config.windHeight && config.Lives > 0)) {
+			ballspot->setxyinczero();
+			ballspot->deleteball();
+		}
+		else if ((b1->getBoundingBox().lowerRight.y > config.windHeight && config.Lives > 0)) {
+			config.multibleballs = false;
+			b1->setxyinczero();
+			b1->deleteball();
+		}
 
 	}
+	else {
+		if (ballspot->getBoundingBox().lowerRight.y > config.windHeight && config.Lives > 0) {
+
+			--config.Lives;
+			ballspot->setpoint(BallUpperleft);
+			padlespot->setpoint(PadleUpperleft);
+			ballspot->resetxyinc();
+			pWind->FlushKeyQueue();
+
+
+
+		}
+	}
+	
 	if (config.Lives == 0) {
 		setgameover(true);
 		
@@ -344,7 +379,7 @@ void game::updateTime(double i , double j)
 void game::statusbardraw()
 {
 	
-	if (bricksGrid->getALL()) {
+	/*if (bricksGrid->getALL()) {
 		gameMode = MODE_DSIGN;
 		pWind->SetPen(config.statusBarColor, 1);
 		pWind->SetBrush(config.statusBarColor);
@@ -354,7 +389,7 @@ void game::statusbardraw()
 		pWind->DrawString(10, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
 		pWind->UpdateBuffer();
 	}
-	else {
+	else {*/
 		pWind->SetPen(config.statusBarColor, 1);
 		pWind->SetBrush(config.statusBarColor);
 		pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
@@ -364,7 +399,7 @@ void game::statusbardraw()
 		pWind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.Score));
 		pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.Lives));
 		updateTime(config.i, config.j);
-	}
+	
 
 }
 
@@ -522,7 +557,7 @@ void game::go()
 						if (config.multibleballs) {
 
 							b1->moveball1();
-
+							
 						}
 						
 						pWind->UpdateBuffer();

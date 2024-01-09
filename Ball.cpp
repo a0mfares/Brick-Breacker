@@ -181,8 +181,8 @@ void Ball::drawgameelements()
 
 void Ball::moveball1()
 {
-   /* pGame->getWind()->SetBuffering(true);
-    pGame->getWind()->FlushKeyQueue();*/
+    pGame->getWind()->SetBuffering(true);
+    pGame->getWind()->FlushKeyQueue();
     // Check for paddle-ball collision
     this->checkforboundies(pGame->getpadle());
     
@@ -193,6 +193,8 @@ void Ball::moveball1()
     this->updatepos();
     //draw ball
     this->draw();
+    /*if (uprLft.y > config.statusBarHeight) this->deleteball();*/
+    
 }
 
 
